@@ -15,6 +15,7 @@ var draw = function(
     offset_variance=[500, 500],
     scalevariance=0.5,
     anglevariance=360,
+    opacityvariance=0.31,
     seed="lol",
     ) {
     canv.reset();
@@ -53,5 +54,7 @@ var draw = function(
         particle.scale(og_scale + scaling, og_scale + scaling);
         var rotation = getRandom(rng) * anglevariance;
         particle.rotate(rotation);
+
+        particle.opacity = og_opacity + getRandom(rng) * opacityvariance;
     }
 };
