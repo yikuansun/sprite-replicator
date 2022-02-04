@@ -8,6 +8,7 @@ var draw = function(
     og_y=144,
     og_scale=2,
     og_angle=20,
+    duplicates=20,
     ) {
     canv.clear();
     var og_sprite = canv.display.image({
@@ -21,16 +22,16 @@ var draw = function(
     // scale
     og_sprite.scale(og_scale, og_scale);
 
-    // offset
-    og_sprite.move(200, 200);
-
     // rotate
     og_sprite.rotate(og_angle);
 
-    // duplicate
-    var sampleduplicate = og_sprite.clone({
-        x: 0,
-        y: 0
-    });
-    canv.addChild(sampleduplicate);
+    for (var i = 0; i < duplicates; i++) {
+        // duplicate
+        var particle = og_sprite.clone({
+            x: 0,
+            y: 0
+        });
+        canv.addChild(particle);
+        particle.move(Math.random() * 500, Math.random() * 500);
+    }
 };
