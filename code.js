@@ -12,7 +12,7 @@ var draw = function(
     offset_type="rect",
     offset_variance=[500, 500]
     ) {
-    canv.clear();
+    canv.reset();
     var og_sprite = canv.display.image({
         x: og_x,
         y: og_y,
