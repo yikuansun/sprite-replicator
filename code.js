@@ -29,6 +29,10 @@ var draw = function(
     // rotate
     og_sprite.rotate(og_angle);
 
+    var getRandom = function(seedobj) {
+        return Math.random() * 2 - 1; // replace with seedrandom later
+    };
+
     for (var i = 0; i < duplicates; i++) {
         // duplicate
         var particle = og_sprite.clone({
@@ -36,12 +40,12 @@ var draw = function(
             y: 0
         });
         canv.addChild(particle);
-        var x_offset = Math.random() * offset_variance[0]; // seed later
-        var y_offset = Math.random() * offset_variance[1];
+        var x_offset = getRandom() * offset_variance[0];
+        var y_offset = getRandom() * offset_variance[1];
         particle.move(x_offset, y_offset);
-        var scaling = Math.random() * scalevariance; // seed later
+        var scaling = getRandom() * scalevariance;
         particle.scale(og_scale + scaling, og_scale + scaling);
-        var rotation = Math.random() * anglevariance; // seed later
+        var rotation = getRandom() * anglevariance;
         particle.rotate(rotation);
     }
 };
