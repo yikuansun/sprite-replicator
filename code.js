@@ -58,3 +58,5 @@ var draw = function(
         particle.opacity = og_opacity + getRandom(rng) * opacityvariance;
     }
 };
+
+draw();
