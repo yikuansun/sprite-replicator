@@ -13,6 +13,7 @@ var draw = function(
     offset_variance=[500, 500],
     scalevariance=0.5,
     anglevariance=360,
+    seed="lol",
     ) {
     canv.reset();
     var og_sprite = canv.display.image({
@@ -30,9 +31,10 @@ var draw = function(
     og_sprite.rotate(og_angle);
 
     var getRandom = function(seedobj) {
-        return Math.random() * 2 - 1; // replace with seedrandom later
+        return seedobj() * 2 - 1; // replace with seedrandom later
     };
 
+    var rng = new Math.seedrandom(seed);
     for (var i = 0; i < duplicates; i++) {
         // duplicate
         var particle = og_sprite.clone({
@@ -40,12 +42,12 @@ var draw = function(
             y: 0
         });
         canv.addChild(particle);
-        var x_offset = getRandom() * offset_variance[0];
-        var y_offset = getRandom() * offset_variance[1];
+        var x_offset = getRandom(rng) * offset_variance[0];
+        var y_offset = getRandom(rng) * offset_variance[1];
         particle.move(x_offset, y_offset);
-        var scaling = getRandom() * scalevariance;
+        var scaling = getRandom(rng) * scalevariance;
         particle.scale(og_scale + scaling, og_scale + scaling);
-        var rotation = getRandom() * anglevariance;
+        var rotation = getRandom(rng) * anglevariance;
         particle.rotate(rotation);
     }
 };
