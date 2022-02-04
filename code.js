@@ -8,6 +8,7 @@ var draw = function(
     og_y=144,
     og_scale=2,
     og_angle=20,
+    og_blendmode="normal",
     duplicates=20,
     offset_type="rect",
     offset_variance=[500, 500],
@@ -20,7 +21,8 @@ var draw = function(
         x: og_x,
         y: og_y,
         origin: { x: "center", y: "center" },
-        image: textureURI
+        image: textureURI,
+        composition: og_blendmode,
     });
     canv.addChild(og_sprite);
 
