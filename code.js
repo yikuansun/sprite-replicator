@@ -56,5 +56,3 @@ var draw = function(
         if (particle.opacity < 0) particle.opacity = 0;
     }
 };
-
-draw();

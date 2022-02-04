@@ -128,31 +128,34 @@ var duplicatesInputs = buildGUIsection([
     }
 ]);
 
+var drawFromInputs = function() {
+    draw(
+        textureURI=textureURI,
+        og_x=parseFloat(document.getElementById("og_x").value),
+        og_y=parseFloat(document.getElementById("og_y").value),
+        og_scale=parseFloat(document.getElementById("og_scale").value),
+        og_angle=parseFloat(document.getElementById("og_angle").value),
+        og_blendmode=document.getElementById("og_blendmode").value,
+        og_opacity=parseFloat(document.getElementById("og_opacity").value),
+        duplicates=parseFloat(document.getElementById("duplicates").value),
+        offset_type="rect",
+        offset_variance=[parseFloat(document.getElementById("offset_variance_0").value), parseFloat(document.getElementById("offset_variance_1").value)],
+        scalevariance=parseFloat(document.getElementById("scalevariance").value),
+        anglevariance=parseFloat(document.getElementById("anglevariance").value),
+        opacityvariance=parseFloat(document.getElementById("opacityvariance").value),
+        seed=document.getElementById("seed").value,
+    );
+};
+
 var textureURI = "https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU";
 
 for (var inputElem of baseInputs.concat(duplicatesInputs)) {
-    inputElem.addEventListener("input", function() {
-        draw(
-            textureURI=textureURI,
-            og_x=parseFloat(document.getElementById("og_x").value),
-            og_y=parseFloat(document.getElementById("og_y").value),
-            og_scale=parseFloat(document.getElementById("og_scale").value),
-            og_angle=parseFloat(document.getElementById("og_angle").value),
-            og_blendmode=document.getElementById("og_blendmode").value,
-            og_opacity=parseFloat(document.getElementById("og_opacity").value),
-            duplicates=parseFloat(document.getElementById("duplicates").value),
-            offset_type="rect",
-            offset_variance=[parseFloat(document.getElementById("offset_variance_0").value), parseFloat(document.getElementById("offset_variance_1").value)],
-            scalevariance=parseFloat(document.getElementById("scalevariance").value),
-            anglevariance=parseFloat(document.getElementById("anglevariance").value),
-            opacityvariance=parseFloat(document.getElementById("opacityvariance").value),
-            seed=document.getElementById("seed").value,
-        );
-    });
+    inputElem.addEventListener("input", drawFromInputs);
 }
 
 document.querySelector("#startbutton").addEventListener("click", function() {
     document.querySelector("#startscreen").style.display = "none";
+    drawFromInputs();
 });
 
 document.querySelector("#fileupload").addEventListener("change", function() {
