@@ -53,6 +53,7 @@ var draw = function(
         particle.rotate(rotation);
 
         particle.opacity = og_opacity + getRandom(rng) * opacityvariance;
+        if (particle.opacity < 0) particle.opacity = 0;
     }
 };
 
