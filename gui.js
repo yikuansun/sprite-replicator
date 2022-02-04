@@ -23,21 +23,45 @@ function buildGUIsection(fields, container=document.body) {
         fieldInputTD.appendChild(inputElem);
         tr.appendChild(fieldInputTD);
 
+        for (var attribute in field.attr) {
+            inputElem.setAttribute(attribute, field.attr[attribute]);
+        }
+
         inputs_out.push(inputElem);
     }
 
     return inputs_out;
 }
 
-var myInputs = buildGUIsection([
+var baseInputs = buildGUIsection([
     {
-        label: "i value",
-        id: "iValueInput",
-        type: "text"
+        label: "X position",
+        id: "og_x",
+        type: "number",
+        attr: { value: 144, min: 0 }
     },
     {
-        label: "j value",
-        id: "jValueInput",
-        type: "text"
+        label: "Y position",
+        id: "og_y",
+        type: "number",
+        attr: { value: 144, min: 0 }
+    },
+    {
+        label: "Scale",
+        id: "og_scale",
+        type: "number",
+        attr: { value: 2, min: 0, max: 5, stap: 0.1 }
+    },
+    {
+        label: "Angle",
+        id: "og_angle",
+        type: "number",
+        attr: { value: 20, min: 0, max: 360 }
+    },
+    {
+        label: "Opacity",
+        id: "og_opacity",
+        type: "number",
+        attr: { value: 0.69, min: 0, max: 1, step: 0.01 }
     }
 ]);
