@@ -1,4 +1,6 @@
 function buildGUIsection(fields, container=document.body) {
+    var inputs_out = [];
+
     var table = document.createElement("table");
     container.appendChild(table);
     table.style.width = "100%";
@@ -18,10 +20,14 @@ function buildGUIsection(fields, container=document.body) {
         inputElem.type = field.type;
         fieldInputTD.appendChild(inputElem);
         tr.appendChild(fieldInputTD);
+
+        inputs_out.push(inputElem);
     }
+
+    return inputs_out;
 }
 
-buildGUIsection([
+var myInputs = buildGUIsection([
     {
         label: "i value",
         id: "iValueInput",
