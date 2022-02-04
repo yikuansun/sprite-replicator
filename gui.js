@@ -16,10 +16,22 @@ function buildGUIsection(fields, container=document.body) {
 
         var fieldInputTD = document.createElement("td");
         fieldInputTD.style.width = "1px"; // force right align
-        var inputElem = document.createElement("input");
+        switch (field.type) {
+            case "select":
+                var inputElem = document.createElement("select");
+                for (var option of field.options) {
+                    var optionElem = document.createElement("option");
+                    optionElem.innerHTML = option;
+                    inputElem.appendChild(optionElem);
+                }
+                break;
+            default:
+                var inputElem = document.createElement("input");
+                inputElem.type = field.type;
+                break;
+        }
         inputElem.id = field.id;
         inputElem.className = "ygui-input";
-        inputElem.type = field.type;
         fieldInputTD.appendChild(inputElem);
         tr.appendChild(fieldInputTD);
 
@@ -57,6 +69,12 @@ var baseInputs = buildGUIsection([
         id: "og_angle",
         type: "number",
         attr: { value: 20, min: 0, max: 360 }
+    },
+    {
+        label: "Blend mode",
+        id: "og_blendmode",
+        type: "select",
+        options: ["normal", "multiply", "darken", "color-burn", "screen", "lighten", "lighter", "color-dodge", "overlay", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]
     },
     {
         label: "Opacity",
