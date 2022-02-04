@@ -148,3 +148,7 @@ for (var inputElem of baseInputs.concat(duplicatesInputs)) {
         );
     });
 }
+
+document.querySelector("#startbutton").addEventListener("click", function() {
+    document.querySelector("#startscreen").style.display = "none";
+});
