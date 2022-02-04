@@ -42,10 +42,7 @@ var draw = function(
     var rng = new Math.seedrandom(seed);
     for (var i = 0; i < duplicates; i++) {
         // duplicate
-        var particle = og_sprite.clone({
-            x: 0,
-            y: 0
-        });
+        var particle = og_sprite.clone({});
         canv.addChild(particle);
         var x_offset = getRandom(rng) * offset_variance[0];
         var y_offset = getRandom(rng) * offset_variance[1];
