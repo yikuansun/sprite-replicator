@@ -166,3 +166,10 @@ document.querySelector("#fileupload").addEventListener("change", function() {
     };
     fileReader.readAsDataURL(file);
 });
+
+document.querySelector("#docWidth").addEventListener("change", function() {
+    canv.width = parseInt(this.value);
+});
+document.querySelector("#docHeight").addEventListener("change", function() {
+    canv.height = parseInt(this.value);
+});
