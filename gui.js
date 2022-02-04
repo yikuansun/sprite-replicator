@@ -83,8 +83,52 @@ var baseInputs = buildGUIsection([
         attr: { value: 0.69, min: 0, max: 1, step: 0.01 }
     }
 ]);
+var duplicatesInputs = buildGUIsection([
+    {
+        label: "Number of duplicates",
+        id: "duplicates",
+        type: "number",
+        attr: { value: 20, min: 0 }
+    },
+    {
+        label: "X Variance",
+        id: "offset_variance_0",
+        type: "number",
+        attr: { value: 500, min: 0 }
+    },
+    {
+        label: "Y Variance",
+        id: "offset_variance_1",
+        type: "number",
+        attr: { value: 500, min: 0 }
+    },
+    {
+        label: "Scale Variance",
+        id: "scalevariance",
+        type: "number",
+        attr: { value: 0.5, min: 0, step: 0.1 }
+    },
+    {
+        label: "Angle Variance",
+        id: "anglevariance",
+        type: "number",
+        attr: { value: 360, min: 0, max: 360 }
+    },
+    {
+        label: "Opacity Variance",
+        id: "opacityvariance",
+        type: "number",
+        attr: { value: 0.31, min: 0, max: 1, step: 0.01 }
+    },
+    {
+        label: "Seed",
+        id: "seed",
+        type: "text",
+        attr: { value: "lol" }
+    }
+]);
 
-for (var inputElem of baseInputs) {
+for (var inputElem of baseInputs.concat(duplicatesInputs)) {
     inputElem.addEventListener("input", function() {
         draw(
             textureURI="https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU", // temporary
@@ -94,6 +138,13 @@ for (var inputElem of baseInputs) {
             og_angle=parseFloat(document.getElementById("og_angle").value),
             og_blendmode=document.getElementById("og_blendmode").value,
             og_opacity=parseFloat(document.getElementById("og_opacity").value),
+            duplicates=parseFloat(document.getElementById("duplicates").value),
+            offset_type="rect",
+            offset_variance=[parseFloat(document.getElementById("offset_variance_0").value), parseFloat(document.getElementById("offset_variance_1").value)],
+            scalevariance=parseFloat(document.getElementById("scalevariance").value),
+            anglevariance=parseFloat(document.getElementById("anglevariance").value),
+            opacityvariance=parseFloat(document.getElementById("opacityvariance").value),
+            seed=document.getElementById("seed").value,
         );
     });
 }
