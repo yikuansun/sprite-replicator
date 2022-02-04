@@ -4,19 +4,21 @@ function buildGUIsection(fields, container=document.body) {
     var table = document.createElement("table");
     container.appendChild(table);
     table.style.width = "100%";
+    table.className = "ygui-table";
 
     for (var field of fields) {
         var tr = document.createElement("tr");
         table.appendChild(tr);
 
         var fieldLabelTD = document.createElement("td");
-        fieldLabelTD.innerHTML = `<label for="${field.id}">${field.label}</label>`;
+        fieldLabelTD.innerHTML = `<label for="${field.id}" class="ygui-label">${field.label}</label>`;
         tr.appendChild(fieldLabelTD);
 
         var fieldInputTD = document.createElement("td");
         fieldInputTD.style.width = "1px"; // force right align
         var inputElem = document.createElement("input");
         inputElem.id = field.id;
+        inputElem.className = "ygui-input";
         inputElem.type = field.type;
         fieldInputTD.appendChild(inputElem);
         tr.appendChild(fieldInputTD);
