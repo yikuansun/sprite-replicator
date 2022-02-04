@@ -15,6 +15,14 @@ canvas {
     background-color: darkgrey;
 }
 
+#startscreen-content {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @media only screen and (max-width: 690px) {
     canvas {
         width: 100%;
