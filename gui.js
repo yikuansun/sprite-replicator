@@ -83,3 +83,17 @@ var baseInputs = buildGUIsection([
         attr: { value: 0.69, min: 0, max: 1, step: 0.01 }
     }
 ]);
+
+for (var inputElem of baseInputs) {
+    inputElem.addEventListener("input", function() {
+        draw(
+            textureURI="https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU", // temporary
+            og_x=parseFloat(document.getElementById("og_x").value),
+            og_y=parseFloat(document.getElementById("og_y").value),
+            og_scale=parseFloat(document.getElementById("og_scale").value),
+            og_angle=parseFloat(document.getElementById("og_angle").value),
+            og_blendmode=document.getElementById("og_blendmode").value,
+            og_opacity=parseFloat(document.getElementById("og_opacity").value),
+        );
+    });
+}
