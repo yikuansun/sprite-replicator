@@ -62,7 +62,7 @@ var baseInputs = buildGUIsection([
         label: "Scale",
         id: "og_scale",
         type: "number",
-        attr: { value: 2, min: 0, max: 5, stap: 0.1 }
+        attr: { value: 2, min: 0, max: 5, step: 0.1 }
     },
     {
         label: "Angle",
