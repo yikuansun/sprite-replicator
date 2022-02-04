@@ -2,13 +2,17 @@ var canv = oCanvas.create({
     canvas: document.querySelector("canvas")
 });
 
-var draw = function() {
+var draw = function(
+    textureURI="https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU",
+    og_x=144,
+    og_y=144,
+    ) {
     canv.clear();
     var og_sprite = canv.display.image({
-        x: 144,
-        y: 144,
+        x: og_x,
+        y: og_y,
         origin: { x: "center", y: "center" },
-        image: "https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU"
+        image: textureURI
     });
     canv.addChild(og_sprite);
 
