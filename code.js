@@ -9,6 +9,8 @@ var draw = function(
     og_scale=2,
     og_angle=20,
     duplicates=20,
+    offset_type="rect",
+    offset_variance=[500, 500]
     ) {
     canv.clear();
     var og_sprite = canv.display.image({
@@ -32,6 +34,8 @@ var draw = function(
             y: 0
         });
         canv.addChild(particle);
-        particle.move(Math.random() * 500, Math.random() * 500);
+        var x_offset = Math.random() * offset_variance[0]; // seed later
+        var y_offset = Math.random() * offset_variance[1];
+        particle.move(x_offset, y_offset);
     }
 };
