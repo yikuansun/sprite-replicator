@@ -2,4 +2,7 @@ canvas {
     max-width: 80vw;
     max-height: 80vh;
     background: url("transparency\ square.png") repeat;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
