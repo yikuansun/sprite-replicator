@@ -128,10 +128,12 @@ var duplicatesInputs = buildGUIsection([
     }
 ]);
 
+var textureURI = "https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU";
+
 for (var inputElem of baseInputs.concat(duplicatesInputs)) {
     inputElem.addEventListener("input", function() {
         draw(
-            textureURI="https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU", // temporary
+            textureURI=textureURI,
             og_x=parseFloat(document.getElementById("og_x").value),
             og_y=parseFloat(document.getElementById("og_y").value),
             og_scale=parseFloat(document.getElementById("og_scale").value),
@@ -151,4 +153,13 @@ for (var inputElem of baseInputs.concat(duplicatesInputs)) {
 
 document.querySelector("#startbutton").addEventListener("click", function() {
     document.querySelector("#startscreen").style.display = "none";
+});
+
+document.querySelector("#fileupload").addEventListener("change", function() {
+    var file = this.files[0];
+    var fileReader = new FileReader();
+    fileReader.onloadend = function(e) {
+        textureURI = e.target.result;
+    };
+    fileReader.readAsDataURL(file);
 });
