@@ -182,12 +182,26 @@ document.querySelector("#exportbutton").addEventListener("click", function() {
 });
 
 document.querySelector("#base-handle").addEventListener("click", function() {
-    if (document.querySelector("#base-section").style.display == "") document.querySelector("#base-section").style.display = "none";
-    else document.querySelector("#base-section").style.display = "";
+    if (document.querySelector("#base-section").style.display == "") {
+        document.querySelector("#base-section").style.display = "none";
+        document.querySelector("#base-handle .arrow").style.transform = "rotate(-45deg)";
+    }
+    else {
+        document.querySelector("#base-section").style.display = "";
+        document.querySelector("#base-handle .arrow").style.transform = "rotate(45deg)";
+    }
 });
 document.querySelector("#duplicates-handle").addEventListener("click", function() {
-    if (document.querySelector("#duplicates-section").style.display == "") document.querySelector("#duplicates-section").style.display = "none";
-    else document.querySelector("#duplicates-section").style.display = "";
+    if (document.querySelector("#duplicates-section").style.display == "") {
+        document.querySelector("#duplicates-section").style.display = "none";
+        document.querySelector("#duplicates-handle .arrow").style.transform = "rotate(-45deg)";
+    }
+    else {
+        document.querySelector("#duplicates-section").style.display = "";
+        document.querySelector("#duplicates-handle .arrow").style.transform = "rotate(45deg)";
+    }
 });
 document.querySelector("#base-section").style.display = "none";
 document.querySelector("#duplicates-section").style.display = "none";
+document.querySelector("#base-handle .arrow").style.transform = "rotate(-45deg)";
+document.querySelector("#duplicates-handle .arrow").style.transform = "rotate(-45deg)";
