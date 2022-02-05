@@ -82,7 +82,7 @@ var baseInputs = buildGUIsection([
         type: "number",
         attr: { value: 0.69, min: 0, max: 1, step: 0.01 }
     }
-]);
+], document.querySelector("#base-section"));
 var duplicatesInputs = buildGUIsection([
     {
         label: "Number of duplicates",
@@ -126,7 +126,7 @@ var duplicatesInputs = buildGUIsection([
         type: "text",
         attr: { value: "lol" }
     }
-]);
+], document.querySelector("#duplicates-section"));
 
 var drawFromInputs = function() {
     draw(
@@ -180,3 +180,14 @@ document.querySelector("#exportbutton").addEventListener("click", function() {
     a.href = document.querySelector("canvas").toDataURL();
     a.click();
 });
+
+document.querySelector("#base-handle").addEventListener("click", function() {
+    if (document.querySelector("#base-section").style.display == "") document.querySelector("#base-section").style.display = "none";
+    else document.querySelector("#base-section").style.display = "";
+});
+document.querySelector("#duplicates-handle").addEventListener("click", function() {
+    if (document.querySelector("#duplicates-section").style.display == "") document.querySelector("#duplicates-section").style.display = "none";
+    else document.querySelector("#duplicates-section").style.display = "";
+});
+document.querySelector("#base-section").style.display = "none";
+document.querySelector("#duplicates-section").style.display = "none";
