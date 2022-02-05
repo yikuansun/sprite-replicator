@@ -173,3 +173,10 @@ document.querySelector("#docWidth").addEventListener("change", function() {
 document.querySelector("#docHeight").addEventListener("change", function() {
     canv.height = parseInt(this.value);
 });
+
+document.querySelector("#exportbutton").addEventListener("click", function() {
+    var a = document.createElement("a");
+    a.download = "particles.png";
+    a.href = document.querySelector("canvas").toDataURL();
+    a.click();
+});
