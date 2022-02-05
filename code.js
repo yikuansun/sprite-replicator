@@ -3,7 +3,7 @@ var canv = oCanvas.create({
 });
 
 var draw = function(
-    textureURI="https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU",
+    textureURI="default_texture.png",
     og_x=144,
     og_y=144,
     og_scale=2,

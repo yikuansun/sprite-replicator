@@ -147,7 +147,7 @@ var drawFromInputs = function() {
     );
 };
 
-var textureURI = "https://i.picsum.photos/id/1064/200/200.jpg?hmac=xUH-ovzKEHg51S8vchfOZNAOcHB6b1TI_HzthmqvcWU";
+var textureURI = "default_texture.png";
 
 for (var inputElem of baseInputs.concat(duplicatesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);
