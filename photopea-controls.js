@@ -13,4 +13,6 @@ if ((new URLSearchParams(location.search)).get("portal") == "photopea") {
 Photopea.runScript(window.parent, "app.echoToOE(app.activeDocument.width.toString()); app.echoToOE(app.activeDocument.height.toString());").then(function(wh) {
     document.querySelector("#docWidth").value = wh[0];
     document.querySelector("#docHeight").value = wh[1];
+    canv.width = parseInt(wh[0]);
+    canv.height = parseInt(wh[1]);
 });
