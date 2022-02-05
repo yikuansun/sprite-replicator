@@ -48,6 +48,7 @@ var draw = function(
         var y_offset = getRandom(rng) * offset_variance[1];
         particle.move(x_offset, y_offset);
         var scaling = getRandom(rng) * scalevariance;
+        if (og_scale + scaling <= 0) scaling = 0.001;
         particle.scale(og_scale + scaling, og_scale + scaling);
         var rotation = getRandom(rng) * anglevariance;
         particle.rotate(rotation);
