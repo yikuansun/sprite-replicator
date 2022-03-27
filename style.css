@@ -12,7 +12,7 @@ canvas {
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: darkgrey;
+    background-color: #222222;
 }
 
 #startscreen-content {
@@ -30,9 +30,10 @@ canvas {
 }
 
 body {
-    background-color: darkgrey;
+    background-color: #222222;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     user-select: none;
+    color: whitesmoke;
 }
 
 #exportbutton {
@@ -55,8 +56,45 @@ body {
 }
 
 .arrow {
-  border: solid black;
+  border: solid whitesmoke;
   border-width: 0 2px 2px 0;
   display: inline-block;
   padding: 2.5px;
+}
+
+input, select {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid grey;
+    outline: none!important;
+    color: grey;
+    transition: 0.5s;
+}
+
+input:hover, select:hover {
+    border-color: #69AA00;
+    color: #69AA00;
+}
+
+input:focus, select:focus {
+    border-color: #00AA00;
+    color: #00AA00;
+}
+
+button, ::-webkit-file-upload-button {
+    color: #69AA00;
+    border: 1px solid #69AA00;
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 25px;
+    transition: 0.5s;
+}
+
+button:hover, ::-webkit-file-upload-button:hover {
+    color: #00AA00;
+    border-color: #00AA00;
+}
+
+option {
+    background-color: #222222;
 }
