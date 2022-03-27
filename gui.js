@@ -100,7 +100,7 @@ var drawFromInputs = function() {
     );
 };
 
-var textureURI = "default_texture.png";
+var textureURI = "textures/Star.png";
 
 for (var inputElem of baseInputs.concat(duplicatesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);

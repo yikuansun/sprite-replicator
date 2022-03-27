@@ -96,3 +96,7 @@ button:hover, ::-webkit-file-upload-button:hover {
 option {
     background-color: #222222;
 }
+
+#guicontainer {
+    width: 300px;
+}
