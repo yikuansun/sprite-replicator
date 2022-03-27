@@ -68,7 +68,6 @@ input, select {
     border-bottom: 1px solid grey;
     outline: none!important;
     color: grey;
-    transition: 0.5s;
 }
 
 input:hover, select:hover {
@@ -87,7 +86,6 @@ button, ::-webkit-file-upload-button {
     background-color: transparent;
     padding: 5px 10px;
     border-radius: 25px;
-    transition: 0.5s;
 }
 
 button:hover, ::-webkit-file-upload-button:hover {
