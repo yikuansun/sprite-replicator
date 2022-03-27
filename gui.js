@@ -111,6 +111,22 @@ document.querySelector("#startbutton").addEventListener("click", function() {
     drawFromInputs();
 });
 
+var availTextures = ["Star", "Custom"];
+for (var x of availTextures) {
+    var option = document.createElement("option");
+    option.innerHTML = x;
+    document.querySelector("#textureselector").appendChild(option);
+}
+document.querySelector("#textureselector").addEventListener("change", function() {
+    if (this.value == "Custom") {
+        document.querySelector("#fileupload").style.display = "inline-block";
+    }
+    else {
+        document.querySelector("#fileupload").style.display = "none";
+        textureURI = `textures/${this.value}.png`;
+    }
+});
+
 document.querySelector("#fileupload").addEventListener("change", function() {
     var file = this.files[0];
     var fileReader = new FileReader();
