@@ -100,7 +100,7 @@ var drawFromInputs = function() {
     );
 };
 
-var textureURI = "textures/Star.png";
+var textureURI = "textures/Orb.png";
 
 for (var inputElem of baseInputs.concat(duplicatesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);
@@ -111,7 +111,7 @@ document.querySelector("#startbutton").addEventListener("click", function() {
     drawFromInputs();
 });
 
-var availTextures = ["Star", "Smoke", "Cosmic Energy", "Explosion", "Bit Rain", "Custom"];
+var availTextures = ["Orb", "Star", "Smoke", "Cosmic Energy", "Explosion", "Bit Rain", "Custom"];
 for (var x of availTextures) {
     var option = document.createElement("option");
     option.innerHTML = x;
