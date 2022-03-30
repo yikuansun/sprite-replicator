@@ -111,7 +111,7 @@ document.querySelector("#startbutton").addEventListener("click", function() {
     drawFromInputs();
 });
 
-var availTextures = ["Orb", "Star", "Smoke", "Cosmic Energy", "Explosion", "Bit Rain", "Custom"];
+var availTextures = ["Orb", "Star", "Smoke", "Cosmic Energy", "Lens Flare", "Explosion", "Bit Rain", "Custom"];
 for (var x of availTextures) {
     var option = document.createElement("option");
     option.innerHTML = x;
