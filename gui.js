@@ -80,6 +80,26 @@ var duplicatesInputs = ygui.buildGUIsection([
         attr: { value: "lol" }
     }
 ], document.querySelector("#duplicates-section"));
+var forcesInputs = ygui.buildGUIsection([
+    {
+        label: "Grid Snap",
+        id: "snapinterval",
+        type: "number",
+        attr: { min: 0, value: 0 }
+    },
+    {
+        label: "Gravity Direction",
+        id: "gravityangle",
+        type: "number",
+        attr: { min: 0, max: 360, value: 0 }
+    },
+    {
+        label: "Gravity Amount",
+        id: "gravityamount",
+        type: "number",
+        attr: { min: 0, value: 0 }
+    },
+], document.querySelector("#forces-section"));
 
 var drawFromInputs = function() {
     draw(
@@ -97,12 +117,15 @@ var drawFromInputs = function() {
         anglevariance=parseFloat(document.getElementById("anglevariance").value),
         opacityvariance=parseFloat(document.getElementById("opacityvariance").value),
         seed=document.getElementById("seed").value,
+        snapinterval=parseFloat(document.getElementById("snapinterval").value),
+        gravityangle=parseFloat(document.getElementById("gravityangle").value),
+        gravityamount=parseFloat(document.getElementById("gravityamount").value),
     );
 };
 
 var textureURI = "textures/Orb.png";
 
-for (var inputElem of baseInputs.concat(duplicatesInputs)) {
+for (var inputElem of baseInputs.concat(duplicatesInputs).concat(forcesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);
 }
 
@@ -150,27 +173,18 @@ document.querySelector("#exportbutton").addEventListener("click", function() {
     a.click();
 });
 
-document.querySelector("#base-handle").addEventListener("click", function() {
-    if (document.querySelector("#base-section").style.display == "") {
-        document.querySelector("#base-section").style.display = "none";
-        document.querySelector("#base-handle .arrow").style.transform = "rotate(-45deg)";
-    }
-    else {
-        document.querySelector("#base-section").style.display = "";
-        document.querySelector("#base-handle .arrow").style.transform = "rotate(45deg)";
-    }
-});
-document.querySelector("#duplicates-handle").addEventListener("click", function() {
-    if (document.querySelector("#duplicates-section").style.display == "") {
-        document.querySelector("#duplicates-section").style.display = "none";
-        document.querySelector("#duplicates-handle .arrow").style.transform = "rotate(-45deg)";
-    }
-    else {
-        document.querySelector("#duplicates-section").style.display = "";
-        document.querySelector("#duplicates-handle .arrow").style.transform = "rotate(45deg)";
-    }
-});
-document.querySelector("#base-section").style.display = "none";
-document.querySelector("#duplicates-section").style.display = "none";
-document.querySelector("#base-handle .arrow").style.transform = "rotate(-45deg)";
-document.querySelector("#duplicates-handle .arrow").style.transform = "rotate(-45deg)";
+for (var sectionName of ["base", "duplicates", "forces"]) {
+    document.querySelector(`#${sectionName}-handle`).addEventListener("click", function() {
+        var sectionName = this.id.split("-")[0].replace("#", "");
+        if (document.querySelector(`#${sectionName}-section`).style.display == "") {
+            document.querySelector(`#${sectionName}-section`).style.display = "none";
+            document.querySelector(`#${sectionName}-handle .arrow`).style.transform = "rotate(-45deg)";
+        }
+        else {
+            document.querySelector(`#${sectionName}-section`).style.display = "";
+            document.querySelector(`#${sectionName}-handle .arrow`).style.transform = "rotate(45deg)";
+        }
+    });
+    document.querySelector(`#${sectionName}-section`).style.display = "none";
+    document.querySelector(`#${sectionName}-handle .arrow`).style.transform = "rotate(-45deg)";
+}

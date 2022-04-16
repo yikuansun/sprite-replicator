@@ -17,8 +17,18 @@ var draw = function(
     anglevariance=360,
     opacityvariance=0.31,
     seed="lol",
+    snapinterval=1,
+    gravityangle=0,
+    gravityamount=0,
     ) {
     canv.reset();
+
+    // snap
+    if (snapinterval) {
+        og_x = Math.round(og_x / snapinterval) * snapinterval;
+        og_y = Math.round(og_y / snapinterval) * snapinterval;
+    }
+
     var og_sprite = canv.display.image({
         x: og_x,
         y: og_y,
@@ -46,6 +56,17 @@ var draw = function(
         canv.addChild(particle);
         var x_offset = getRandom(rng) * offset_variance[0];
         var y_offset = getRandom(rng) * offset_variance[1];
+
+        // snap
+        if (snapinterval) {
+            x_offset = Math.round(x_offset / snapinterval) * snapinterval;
+            y_offset = Math.round(y_offset / snapinterval) * snapinterval;
+        }
+        
+        // gravity
+        x_offset += Math.cos(gravityangle * Math.PI / 180) * (i * gravityamount);
+        y_offset += Math.sin(gravityangle * Math.PI / 180) * (i * gravityamount);
+
         particle.move(x_offset, y_offset);
         var scaling = getRandom(rng) * scalevariance;
         if (og_scale + scaling <= 0) scaling = 0.001;
