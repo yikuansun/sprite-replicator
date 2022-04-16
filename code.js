@@ -18,6 +18,8 @@ var draw = function(
     opacityvariance=0.31,
     seed="lol",
     snapinterval=1,
+    gravityangle=0,
+    gravityamount=0,
     ) {
     canv.reset();
 
@@ -60,6 +62,10 @@ var draw = function(
             x_offset = Math.round(x_offset / snapinterval) * snapinterval;
             y_offset = Math.round(y_offset / snapinterval) * snapinterval;
         }
+        
+        // gravity
+        x_offset += Math.cos(gravityangle * Math.PI / 180) * (i * gravityamount);
+        y_offset += Math.sin(gravityangle * Math.PI / 180) * (i * gravityamount);
 
         particle.move(x_offset, y_offset);
         var scaling = getRandom(rng) * scalevariance;

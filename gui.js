@@ -86,7 +86,19 @@ var forcesInputs = ygui.buildGUIsection([
         id: "snapinterval",
         type: "number",
         attr: { min: 0, value: 0 }
-    }
+    },
+    {
+        label: "Gravity Direction",
+        id: "gravityangle",
+        type: "number",
+        attr: { min: 0, max: 360, value: 0 }
+    },
+    {
+        label: "Gravity Amount",
+        id: "gravityamount",
+        type: "number",
+        attr: { min: 0, value: 0 }
+    },
 ], document.querySelector("#forces-section"));
 
 var drawFromInputs = function() {
@@ -106,6 +118,8 @@ var drawFromInputs = function() {
         opacityvariance=parseFloat(document.getElementById("opacityvariance").value),
         seed=document.getElementById("seed").value,
         snapinterval=parseFloat(document.getElementById("snapinterval").value),
+        gravityangle=parseFloat(document.getElementById("gravityangle").value),
+        gravityamount=parseFloat(document.getElementById("gravityamount").value),
     );
 };
 
