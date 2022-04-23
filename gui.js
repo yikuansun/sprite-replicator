@@ -192,13 +192,15 @@ for (var sectionName of ["base", "duplicates", "forces"]) {
 for (var i of document.querySelectorAll("#bgcolors i")) {
     i.addEventListener("click", function() {
         if (this.style.backgroundColor) {
-            canv.canvas.canvas.style.backgroundColor = this.style.backgroundColor;
-            canv.canvas.canvas.style.backgroundImage = "none";
+            document.querySelector("canvas").style.backgroundImage = "none";
+            document.querySelector("canvas").style.boxShadow = "inset 0 0px 0px 600px " + this.style.backgroundColor;
         }
         else {
-            canv.canvas.canvas.style.backgroundColor = "";
-            canv.canvas.canvas.style.backgroundImage = "";
-            canv.canvas.canvas.style.backgroundImage = "url('transparency\\ square.png')";
+            document.querySelector("canvas").style.boxShadow = "";
+            document.querySelector("canvas").style.backgroundImage = "";
+            setTimeout(function() {
+                document.querySelector("canvas").style.backgroundImage = "url('transparency\\ square.png')";
+            }, 10);
         }
         document.getElementById("selected-bgcolor").id = "";
         this.id = "selected-bgcolor";
