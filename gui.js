@@ -188,3 +188,19 @@ for (var sectionName of ["base", "duplicates", "forces"]) {
     document.querySelector(`#${sectionName}-section`).style.display = "none";
     document.querySelector(`#${sectionName}-handle .arrow`).style.transform = "rotate(-45deg)";
 }
+
+for (var i of document.querySelectorAll("#bgcolors i")) {
+    i.addEventListener("click", function() {
+        if (this.style.backgroundColor) {
+            canv.canvas.canvas.style.backgroundColor = this.style.backgroundColor;
+            canv.canvas.canvas.style.backgroundImage = "none";
+        }
+        else {
+            canv.canvas.canvas.style.backgroundColor = "";
+            canv.canvas.canvas.style.backgroundImage = "";
+            canv.canvas.canvas.style.backgroundImage = "url('transparency\\ square.png')";
+        }
+        document.getElementById("selected-bgcolor").id = "";
+        this.id = "selected-bgcolor";
+    });
+}
