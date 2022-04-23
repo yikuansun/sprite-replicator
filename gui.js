@@ -188,3 +188,18 @@ for (var sectionName of ["base", "duplicates", "forces"]) {
     document.querySelector(`#${sectionName}-section`).style.display = "none";
     document.querySelector(`#${sectionName}-handle .arrow`).style.transform = "rotate(-45deg)";
 }
+
+for (var i of document.querySelectorAll("#bgcolors i")) {
+    i.addEventListener("click", function() {
+        if (this.style.backgroundColor) {
+            document.querySelector("canvas").style.backgroundImage = "none";
+            document.querySelector("canvas").style.boxShadow = "inset 0 0px 0px 600px " + this.style.backgroundColor;
+        }
+        else {
+            document.querySelector("canvas").style.boxShadow = "";
+            document.querySelector("canvas").style.backgroundImage = "";
+        }
+        document.getElementById("selected-bgcolor").id = "";
+        this.id = "selected-bgcolor";
+    });
+}
