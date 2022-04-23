@@ -198,9 +198,6 @@ for (var i of document.querySelectorAll("#bgcolors i")) {
         else {
             document.querySelector("canvas").style.boxShadow = "";
             document.querySelector("canvas").style.backgroundImage = "";
-            setTimeout(function() {
-                document.querySelector("canvas").style.backgroundImage = "url('transparency\\ square.png')";
-            }, 10);
         }
         document.getElementById("selected-bgcolor").id = "";
         this.id = "selected-bgcolor";
