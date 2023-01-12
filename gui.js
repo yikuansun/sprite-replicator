@@ -103,7 +103,7 @@ var forcesInputs = ygui.buildGUIsection([
 
 var drawFromInputs = function() {
     draw(
-        textureURI=textureURI,
+        textureObj=textureObj,
         og_x=parseFloat(document.getElementById("og_x").value),
         og_y=parseFloat(document.getElementById("og_y").value),
         og_scale=parseFloat(document.getElementById("og_scale").value),
@@ -124,6 +124,8 @@ var drawFromInputs = function() {
 };
 
 var textureURI = "textures/Orb.png";
+var textureObj = new Image();
+textureObj.src = textureURI;
 
 for (var inputElem of baseInputs.concat(duplicatesInputs).concat(forcesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);
@@ -147,6 +149,10 @@ document.querySelector("#textureselector").addEventListener("change", function()
     else {
         document.querySelector("#fileupload").style.display = "none";
         textureURI = `textures/${this.value}.png`;
+        textureObj.addEventListener("load", function() {
+            drawFromInputs();
+        });
+        textureObj.src = textureURI;
     }
 });
 
@@ -155,6 +161,10 @@ document.querySelector("#fileupload").addEventListener("change", function() {
     var fileReader = new FileReader();
     fileReader.onloadend = function(e) {
         textureURI = e.target.result;
+        textureObj.addEventListener("load", function() {
+            drawFromInputs();
+        });
+        textureObj.src = textureURI;
     };
     fileReader.readAsDataURL(file);
 });

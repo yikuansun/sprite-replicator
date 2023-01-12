@@ -1,9 +1,8 @@
-var canv = oCanvas.create({
-    canvas: document.querySelector("canvas")
-});
+var canv = document.querySelector("canvas");
+var ctx = canv.getContext("2d");
 
 var draw = function(
-    textureURI="default_texture.png",
+    textureObj=new Image(),
     og_x=144,
     og_y=144,
     og_scale=2,
@@ -21,7 +20,9 @@ var draw = function(
     gravityangle=0,
     gravityamount=0,
     ) {
-    canv.reset();
+    ctx.restore();
+    ctx.save();
+    ctx.clearRect(0, 0, canv.width, canv.height);
 
     // snap
     if (snapinterval) {
@@ -29,21 +30,16 @@ var draw = function(
         og_y = Math.round(og_y / snapinterval) * snapinterval;
     }
 
-    var og_sprite = canv.display.image({
+    var og_sprite = {
         x: og_x,
         y: og_y,
-        origin: { x: "center", y: "center" },
-        image: textureURI,
-        composition: og_blendmode,
+        width: textureObj.width * og_scale,
+        height: textureObj.height * og_scale,
+        image: textureObj,
+        blendMode: og_blendmode,
         opacity: og_opacity,
-    });
-    canv.addChild(og_sprite);
-
-    // scale
-    og_sprite.scale(og_scale, og_scale);
-
-    // rotate
-    og_sprite.rotate(og_angle);
+        angle: og_angle,
+    };
 
     var getRandom = function(seedobj) {
         return seedobj() * 2 - 1; // replace with seedrandom later
@@ -51,9 +47,10 @@ var draw = function(
 
     var rng = new Math.seedrandom(seed);
     for (var i = 0; i < duplicates; i++) {
+        ctx.restore();
+        ctx.save();
         // duplicate
-        var particle = og_sprite.clone({});
-        canv.addChild(particle);
+        var particle = Object.assign({}, og_sprite);
         var x_offset = getRandom(rng) * offset_variance[0];
         var y_offset = getRandom(rng) * offset_variance[1];
 
@@ -67,14 +64,21 @@ var draw = function(
         x_offset += Math.cos(gravityangle * Math.PI / 180) * (i * gravityamount);
         y_offset += Math.sin(gravityangle * Math.PI / 180) * (i * gravityamount);
 
-        particle.move(x_offset, y_offset);
+        particle.x += x_offset; particle.y += y_offset;
         var scaling = getRandom(rng) * scalevariance;
         if (og_scale + scaling <= 0) scaling = 0.001;
-        particle.scale(og_scale + scaling, og_scale + scaling);
+        particle.width *= og_scale + scaling;
+        particle.height *= og_scale + scaling;
         var rotation = getRandom(rng) * anglevariance;
-        particle.rotate(rotation);
+        particle.angle += rotation;
 
         particle.opacity = og_opacity + getRandom(rng) * opacityvariance;
         if (particle.opacity < 0) particle.opacity = 0;
+        
+        ctx.translate(particle.x, particle.y);
+        ctx.rotate(particle.angle * Math.PI / 180);
+        ctx.globalAlpha = particle.opacity;
+        ctx.globalCompositeOperation = particle.blendMode;
+        ctx.drawImage(particle.image, -particle.width / 2, -particle.height / 2, particle.width, particle.height);
     }
 };
