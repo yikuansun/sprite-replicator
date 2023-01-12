@@ -34,6 +34,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     user-select: none;
     color: whitesmoke;
+    overflow-y: scroll;
 }
 
 #exportbutton {

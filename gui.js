@@ -3,25 +3,25 @@ var baseInputs = ygui.buildGUIsection([
         label: "X position",
         id: "og_x",
         type: "number",
-        attr: { value: 144, min: 0 }
+        attr: { value: 960, min: 0 }
     },
     {
         label: "Y position",
         id: "og_y",
         type: "number",
-        attr: { value: 144, min: 0 }
+        attr: { value: 540, min: 0 }
     },
     {
         label: "Scale",
         id: "og_scale",
         type: "number",
-        attr: { value: 2, min: 0, max: 5, step: 0.1 }
+        attr: { value: 1, min: 0, max: 5, step: 0.1 }
     },
     {
         label: "Angle",
         id: "og_angle",
         type: "number",
-        attr: { value: 20, min: 0, max: 360 }
+        attr: { value: 0, min: 0, max: 360 }
     },
     {
         label: "Blend mode",
@@ -33,7 +33,7 @@ var baseInputs = ygui.buildGUIsection([
         label: "Opacity",
         id: "og_opacity",
         type: "number",
-        attr: { value: 0.69, min: 0, max: 1, step: 0.01 }
+        attr: { value: 0.5, min: 0, max: 1, step: 0.01 }
     }
 ], document.querySelector("#base-section"));
 var duplicatesInputs = ygui.buildGUIsection([
@@ -71,13 +71,13 @@ var duplicatesInputs = ygui.buildGUIsection([
         label: "Opacity Variance",
         id: "opacityvariance",
         type: "number",
-        attr: { value: 0.31, min: 0, max: 1, step: 0.01 }
+        attr: { value: 0.5, min: 0, max: 1, step: 0.01 }
     },
     {
         label: "Seed",
         id: "seed",
         type: "text",
-        attr: { value: "lol" }
+        attr: { value: "12321" }
     }
 ], document.querySelector("#duplicates-section"));
 var forcesInputs = ygui.buildGUIsection([
@@ -103,7 +103,7 @@ var forcesInputs = ygui.buildGUIsection([
 
 var drawFromInputs = function() {
     draw(
-        textureURI=textureURI,
+        textureObj=textureObj,
         og_x=parseFloat(document.getElementById("og_x").value),
         og_y=parseFloat(document.getElementById("og_y").value),
         og_scale=parseFloat(document.getElementById("og_scale").value),
@@ -124,6 +124,8 @@ var drawFromInputs = function() {
 };
 
 var textureURI = "textures/Orb.png";
+var textureObj = new Image();
+textureObj.src = textureURI;
 
 for (var inputElem of baseInputs.concat(duplicatesInputs).concat(forcesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);
@@ -147,6 +149,10 @@ document.querySelector("#textureselector").addEventListener("change", function()
     else {
         document.querySelector("#fileupload").style.display = "none";
         textureURI = `textures/${this.value}.png`;
+        textureObj.addEventListener("load", function() {
+            drawFromInputs();
+        });
+        textureObj.src = textureURI;
     }
 });
 
@@ -155,6 +161,10 @@ document.querySelector("#fileupload").addEventListener("change", function() {
     var fileReader = new FileReader();
     fileReader.onloadend = function(e) {
         textureURI = e.target.result;
+        textureObj.addEventListener("load", function() {
+            drawFromInputs();
+        });
+        textureObj.src = textureURI;
     };
     fileReader.readAsDataURL(file);
 });
