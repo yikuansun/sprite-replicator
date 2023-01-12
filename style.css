@@ -85,7 +85,7 @@ button, ::-webkit-file-upload-button {
     color: #69AA00;
     border: 1px solid #69AA00;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 6px 16px;
     border-radius: 25px;
 }
 
@@ -99,7 +99,7 @@ option {
 }
 
 #guicontainer {
-    width: 300px;
+    width: 256px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
