@@ -76,7 +76,7 @@ var duplicatesInputs = ygui.buildGUIsection([
     {
         label: "Seed",
         id: "seed",
-        type: "text",
+        type: "number",
         attr: { value: "12321" }
     }
 ], document.querySelector("#duplicates-section"));
