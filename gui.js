@@ -38,7 +38,7 @@ var baseInputs = ygui.buildGUIsection([
 ], document.querySelector("#base-section"));
 var duplicatesInputs = ygui.buildGUIsection([
     {
-        label: "Number of duplicates",
+        label: "Count",
         id: "duplicates",
         type: "number",
         attr: { value: 20, min: 0 }
