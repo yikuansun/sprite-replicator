@@ -123,3 +123,7 @@ option {
 #selected-bgcolor {
     outline: 2px solid #00AA00;
 }
+
+.ygui-table {
+    margin-bottom: 8.1px;
+}
