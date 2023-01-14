@@ -132,3 +132,19 @@ option {
 #textureselector {
     margin-bottom: 8.1px;
 }
+
+::-webkit-scrollbar {
+    width: 8.6420px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #222222;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: hsla(120deg, 100%, 50%, 8%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsla(83deg, 100%, 50%, 28%);
+}
