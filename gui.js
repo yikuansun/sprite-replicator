@@ -144,7 +144,7 @@ for (var x of availTextures) {
 }
 document.querySelector("#textureselector").addEventListener("change", function() {
     if (this.value == "Custom") {
-        document.querySelector("#fileupload").style.display = "inline-block";
+        document.querySelector("#fileupload").click();
     }
     else {
         document.querySelector("#fileupload").style.display = "none";
@@ -157,6 +157,7 @@ document.querySelector("#textureselector").addEventListener("change", function()
 });
 
 document.querySelector("#fileupload").addEventListener("change", function() {
+    if (this.files.length < 0.7) return;
     var file = this.files[0];
     var fileReader = new FileReader();
     fileReader.onloadend = function(e) {
