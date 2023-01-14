@@ -18,6 +18,14 @@
         </div>
         <canvas width="1920" height="1080"></canvas>
         <br /> <button id="exportbutton">Export</button>
+        <br /> <br uh />
+        <center>
+            <label for="textureselector">Texture:</label>
+            <select id="textureselector"></select>
+            <br />
+            <input id="fileupload" type="file" accept="image/png, image/jpeg" style="display: none;" />
+            <br />
+        </center>
         <div id="guicontainer">
             <div id="base-handle"><i class="arrow"></i> Base</div>
             <div id="base-section"></div>
@@ -32,11 +40,6 @@
             <input id="docWidth" type="number" value="1920" />
             *
             <input id="docHeight" type="number" value="1080" />
-            <br />
-            <label for="textureselector">Texture:</label>
-            <select id="textureselector"></select>
-            <br />
-            <input id="fileupload" type="file" accept="image/png, image/jpeg" style="display: none;" />
             <br />
             <button id="startbutton">Go</button>
             </div>
