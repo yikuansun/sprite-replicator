@@ -145,6 +145,7 @@ for (var x of availTextures) {
 document.querySelector("#textureselector").addEventListener("change", function() {
     if (this.value == "Custom") {
         document.querySelector("#fileupload").click();
+        this.value = `custom_texture_${Math.random().toString().slice(2, 6)}`;
     }
     else {
         document.querySelector("#fileupload").style.display = "none";
@@ -156,7 +157,7 @@ document.querySelector("#textureselector").addEventListener("change", function()
     }
 });
 
-document.querySelector("#fileupload").addEventListener("change", function() {
+document.querySelector("#fileupload").addEventListener("input", function() {
     if (this.files.length < 0.7) return;
     var file = this.files[0];
     var fileReader = new FileReader();
