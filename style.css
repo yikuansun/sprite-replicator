@@ -83,10 +83,11 @@ input:focus, select:focus {
 
 button, ::-webkit-file-upload-button {
     color: #69AA00;
-    border: 1px solid #69AA00;
+    border: 2px solid #69AA00;
     background-color: transparent;
     padding: 6px 16px;
     border-radius: 25px;
+    font-weight: bold;
 }
 
 button:hover, ::-webkit-file-upload-button:hover {

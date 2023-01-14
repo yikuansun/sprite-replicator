@@ -15,4 +15,5 @@ Photopea.runScript(window.parent, "app.echoToOE(app.activeDocument.width.toStrin
     document.querySelector("#docHeight").value = wh[1];
     canv.width = parseInt(wh[0]);
     canv.height = parseInt(wh[1]);
+    document.querySelector("#startbutton").click();
 });
