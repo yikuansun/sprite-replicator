@@ -126,6 +126,9 @@ var drawFromInputs = function() {
 var textureURI = "textures/Orb.png";
 var textureObj = new Image();
 textureObj.src = textureURI;
+textureObj.addEventListener("load", function() {
+    drawFromInputs();
+});
 
 for (var inputElem of baseInputs.concat(duplicatesInputs).concat(forcesInputs)) {
     inputElem.addEventListener("input", drawFromInputs);
