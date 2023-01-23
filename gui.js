@@ -99,6 +99,12 @@ var forcesInputs = ygui.buildGUIsection([
         type: "number",
         attr: { min: 0, value: 0 }
     },
+    {
+        label: "Fading",
+        id: "fading",
+        type: "number",
+        attr: { min: 0, value: 0, step: 0.01 }
+    },
 ], document.querySelector("#forces-section"));
 
 var drawFromInputs = function() {
@@ -120,6 +126,7 @@ var drawFromInputs = function() {
         snapinterval=parseFloat(document.getElementById("snapinterval").value),
         gravityangle=parseFloat(document.getElementById("gravityangle").value),
         gravityamount=parseFloat(document.getElementById("gravityamount").value),
+        fading=parseFloat(document.getElementById("fading").value),
     );
 };
 
