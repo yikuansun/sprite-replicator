@@ -176,9 +176,11 @@ document.querySelector("#fileupload").addEventListener("input", function() {
 
 document.querySelector("#docWidth").addEventListener("change", function() {
     canv.width = parseInt(this.value);
+    document.querySelector("#og_x").value = canv.width / 2;
 });
 document.querySelector("#docHeight").addEventListener("change", function() {
     canv.height = parseInt(this.value);
+    document.querySelector("#og_y").value = canv.height / 2;
 });
 
 document.querySelector("#exportbutton").addEventListener("click", function() {
