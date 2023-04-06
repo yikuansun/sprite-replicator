@@ -77,7 +77,7 @@ var duplicatesInputs = ygui.buildGUIsection([
         label: "Seed",
         id: "seed",
         type: "number",
-        attr: { value: "12321" }
+        attr: { value: "12345" }
     }
 ], document.querySelector("#duplicates-section"));
 var forcesInputs = ygui.buildGUIsection([
@@ -91,13 +91,25 @@ var forcesInputs = ygui.buildGUIsection([
         label: "Gravity Direction",
         id: "gravityangle",
         type: "number",
-        attr: { min: 0, max: 360, value: 0 }
+        attr: { min: 0, max: 360, value: 90 }
     },
     {
         label: "Gravity Amount",
         id: "gravityamount",
         type: "number",
         attr: { min: 0, value: 0 }
+    },
+    {
+        label: "Mass Variance",
+        id: "massVariance",
+        type: "number",
+        attr: { min: 0, max: 1, value: 0.5, step: 0.01 }
+    },
+    {
+        label: "Fading",
+        id: "fading",
+        type: "number",
+        attr: { min: 0, value: 0, step: 0.01 }
     },
 ], document.querySelector("#forces-section"));
 
@@ -120,6 +132,8 @@ var drawFromInputs = function() {
         snapinterval=parseFloat(document.getElementById("snapinterval").value),
         gravityangle=parseFloat(document.getElementById("gravityangle").value),
         gravityamount=parseFloat(document.getElementById("gravityamount").value),
+        massVariance=parseFloat(document.getElementById("massVariance").value),
+        fading=parseFloat(document.getElementById("fading").value),
     );
 };
 
