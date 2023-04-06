@@ -100,6 +100,12 @@ var forcesInputs = ygui.buildGUIsection([
         attr: { min: 0, value: 0 }
     },
     {
+        label: "Mass Variance",
+        id: "massVariance",
+        type: "number",
+        attr: { min: 0, max: 1, value: 0.5, step: 0.01 }
+    },
+    {
         label: "Fading",
         id: "fading",
         type: "number",
@@ -126,6 +132,7 @@ var drawFromInputs = function() {
         snapinterval=parseFloat(document.getElementById("snapinterval").value),
         gravityangle=parseFloat(document.getElementById("gravityangle").value),
         gravityamount=parseFloat(document.getElementById("gravityamount").value),
+        massVariance=parseFloat(document.getElementById("massVariance").value),
         fading=parseFloat(document.getElementById("fading").value),
     );
 };

@@ -19,6 +19,7 @@ var draw = function(
     snapinterval=1,
     gravityangle=0,
     gravityamount=0,
+    massVariance=1,
     fading=0,
     ) {
     ctx.restore();
@@ -62,8 +63,9 @@ var draw = function(
         }
         
         // gravity
-        x_offset += Math.cos(gravityangle * Math.PI / 180) * (i * gravityamount);
-        y_offset += Math.sin(gravityangle * Math.PI / 180) * (i * gravityamount);
+        var pMass = 0.5 + massVariance * getRandom(rng);
+        x_offset += Math.cos(gravityangle * Math.PI / 180) * (pMass * gravityamount);
+        y_offset += Math.sin(gravityangle * Math.PI / 180) * (pMass * gravityamount);
 
         particle.x += x_offset; particle.y += y_offset;
         var scaling = getRandom(rng) * scalevariance;
