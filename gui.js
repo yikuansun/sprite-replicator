@@ -77,7 +77,7 @@ var duplicatesInputs = ygui.buildGUIsection([
         label: "Seed",
         id: "seed",
         type: "number",
-        attr: { value: "12321" }
+        attr: { value: "12345" }
     }
 ], document.querySelector("#duplicates-section"));
 var forcesInputs = ygui.buildGUIsection([
@@ -91,7 +91,7 @@ var forcesInputs = ygui.buildGUIsection([
         label: "Gravity Direction",
         id: "gravityangle",
         type: "number",
-        attr: { min: 0, max: 360, value: 0 }
+        attr: { min: 0, max: 360, value: 90 }
     },
     {
         label: "Gravity Amount",

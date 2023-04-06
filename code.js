@@ -76,7 +76,7 @@ var draw = function(
         particle.angle += rotation;
 
         particle.opacity = og_opacity + getRandom(rng) * opacityvariance;
-        particle.opacity -= fading * i;
+        particle.opacity -= fading * pMass;
         if (particle.opacity < 0) particle.opacity = 0;
         
         ctx.translate(particle.x, particle.y);
