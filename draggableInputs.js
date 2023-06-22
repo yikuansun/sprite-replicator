@@ -1,7 +1,8 @@
 var inputDrag = function(e) {
-    this.value = parseFloat(this.value) + e.movementX * (Boolean(this.step)?(parseFloat(this.step)):(1));
+    this.value = parseFloat(this.value) + e.movementX * (parseFloat(this.step) || 1);
     if (parseFloat(this.value) < parseFloat(this.min)) this.value = parseFloat(this.min);
     if (parseFloat(this.value) > parseFloat(this.max)) this.value = parseFloat(this.max);
+    this.value = parseFloat(parseFloat(this.value).toPrecision(7));
     this.dispatchEvent(new Event("input", {
         bubbles: true,
         cancelable: true,
