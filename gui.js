@@ -15,7 +15,7 @@ var baseInputs = ygui.buildGUIsection([
         label: "Scale",
         id: "og_scale",
         type: "number",
-        attr: { value: 1, min: 0, max: 5, step: 0.1 }
+        attr: { value: 1, min: 0, max: 5, step: 0.01 }
     },
     {
         label: "Angle",
