@@ -15,6 +15,9 @@ var draw = function(
     scalevariance=0.5,
     anglevariance=360,
     opacityvariance=0.31,
+    brightnessvariance=0,
+    saturationvariance=0,
+    huevariance=0,
     seed="lol",
     snapinterval=1,
     gravityangle=0,
@@ -78,11 +81,20 @@ var draw = function(
         particle.opacity = og_opacity + getRandom(rng) * opacityvariance;
         particle.opacity -= fading * pMass;
         if (particle.opacity < 0) particle.opacity = 0;
+
+        particle.brightness = 1 - brightnessvariance * rng();
+        particle.saturation = 1 - saturationvariance * rng();
+        particle.hueRotation = huevariance * getRandom(rng);
         
         ctx.translate(particle.x, particle.y);
         ctx.rotate(particle.angle * Math.PI / 180);
         ctx.globalAlpha = particle.opacity;
         ctx.globalCompositeOperation = particle.blendMode;
+        var ctxFilter = "";
+        if (particle.brightness < 1) ctxFilter += `brightness(${particle.brightness}) `
+        if (particle.saturation < 1) ctxFilter += `saturate(${particle.saturation}) `
+        if (particle.hueRotation) ctxFilter += `hue-rotate(${particle.hueRotation}deg) `;
+        ctx.filter = ctxFilter;
         ctx.drawImage(particle.image, -particle.width / 2, -particle.height / 2, particle.width, particle.height);
     }
 };

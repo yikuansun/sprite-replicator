@@ -74,6 +74,24 @@ var duplicatesInputs = ygui.buildGUIsection([
         attr: { value: 0.5, min: 0, max: 1, step: 0.01 }
     },
     {
+        label: "Exposure Variance",
+        id: "brightnessvariance",
+        type: "number",
+        attr: { value: 0, min: 0, max: 1, step: 0.01 }
+    },
+    {
+        label: "Saturation Variance",
+        id: "saturationvariance",
+        type: "number",
+        attr: { value: 0, min: 0, max: 1, step: 0.01 }
+    },
+    {
+        label: "Hue Variance",
+        id: "huevariance",
+        type: "number",
+        attr: { value: 0, min: 0, max: 360 }
+    },
+    {
         label: "Seed",
         id: "seed",
         type: "number",
@@ -128,6 +146,9 @@ var drawFromInputs = function() {
         scalevariance=parseFloat(document.getElementById("scalevariance").value),
         anglevariance=parseFloat(document.getElementById("anglevariance").value),
         opacityvariance=parseFloat(document.getElementById("opacityvariance").value),
+        brightnessvariance=parseFloat(document.getElementById("brightnessvariance").value),
+        saturationvariance=parseFloat(document.getElementById("saturationvariance").value),
+        huevariance=parseFloat(document.getElementById("huevariance").value),
         seed=document.getElementById("seed").value,
         snapinterval=parseFloat(document.getElementById("snapinterval").value),
         gravityangle=parseFloat(document.getElementById("gravityangle").value),
