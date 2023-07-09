@@ -28,3 +28,9 @@ var disableDrag = function() {
 };
 document.body.addEventListener("mouseup", disableDrag);
 window.addEventListener("blur", disableDrag);
+window.addEventListener("mousemove", function(e) {
+    if (inputDragReal && (e.clientX < 10 || e.clientY < 10 || e.clientX > window.innerWidth - 10 || e.clientY > window.innerHeight - 10)) {
+        document.activeElement.blur();
+        disableDrag();            
+    }
+});
