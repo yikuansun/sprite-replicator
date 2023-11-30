@@ -8,6 +8,11 @@ if ((new URLSearchParams(location.search)).get("portal") == "photopea") {
         Photopea.runScript(window.parent, `app.open("${document.querySelector("canvas").toDataURL()}", null, true)`);
     });
     newExportButton.id = "exportbutton";
+
+    let option = document.createElement("option");
+    option.innerText = "Use Selected Layer";
+    option.value = "READ_SMART_OBJECT";
+    document.querySelector("#textureselector").appendChild(option);
 }
 
 Photopea.runScript(window.parent, "app.echoToOE(app.activeDocument.width.toString()); app.echoToOE(app.activeDocument.height.toString());").then(function(wh) {
