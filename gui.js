@@ -185,6 +185,29 @@ document.querySelector("#textureselector").addEventListener("change", function()
         document.querySelector("#fileupload").click();
         this.value = `custom_texture_${Math.random().toString().slice(2, 6)}`;
     }
+    else if (this.value == "READ_SMART_OBJECT") {
+        Photopea.runScript(window.parent, `
+            app.echoToOE(app.activeDocument.activeLayer.kind == 1);
+        `).then(async (data) => {
+            if (data[0]) {
+                await Photopea.runScript(window.parent, `executeAction(stringIDToTypeID("placedLayerEditContents"));`);
+                let buff = "done";
+                do {
+                    buff = (await Photopea.runScript(window.parent, `app.activeDocument.saveToOE("png");`))[0];
+                } while (buff == "done");
+                await Photopea.runScript(window.parent, `app.activeDocument.close();`);
+                textureURI = "data:image/png;base64," + base64ArrayBuffer(buff);
+                textureObj.addEventListener("load", function() {
+                    drawFromInputs();
+                });
+                textureObj.src = textureURI;
+            }
+            else {
+                await Photopea.runScript(window.parent, `alert("Selected layer must be smart object.");`);
+                this.value = textureURI.split("/")[1].split(".")[0];
+            }
+        });
+    }
     else {
         document.querySelector("#fileupload").style.display = "none";
         textureURI = `textures/${this.value}.png`;
