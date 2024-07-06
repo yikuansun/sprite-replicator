@@ -1,6 +1,6 @@
 canvas {
     width: 690px;
-    background: url("transparency\ square.png") repeat;
+    /*background: url("transparency\ square.png") repeat;*/
     position: relative;
     left: 50%;
     transform: translateX(-50%);
