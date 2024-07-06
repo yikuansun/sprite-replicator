@@ -65,3 +65,5 @@ function base64ArrayBuffer(arrayBuffer) {
   
   return base64
 }
+
+export default base64ArrayBuffer;
