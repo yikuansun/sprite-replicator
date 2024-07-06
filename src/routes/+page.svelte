@@ -40,7 +40,7 @@
         seed: 0,
         focalDepth: 0,
         depthOfField: 0,
-        fog: 0,
+        fog: 20,
         cameraZ: 500,
         vanishX: 960,
         vanishY: 540,
@@ -75,7 +75,7 @@
             spriteData.push(dupSprite);
         }
 
-        spriteData.sort((a, b) => { return a.z - b.z; });
+        spriteData.sort((a, b) => { return b.z - a.z; });
         spriteData = spriteData;
     }
 
@@ -99,6 +99,7 @@
                 cy={point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"])["y"]}
                 rx={25 * point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"])["scale"]}
                 ry={25 * point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"])["scale"]}
+                style:fill="hsl(0deg, 0%, {Math.max((sprite["z"] - userOptions["focalDepth"]) * userOptions["fog"] / 100, 0)}%)"
                 />
         {/each}
     </svg>
@@ -108,6 +109,8 @@ Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={c
 Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={createNoise} /> <br />
 Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={createNoise} /> <br />
 Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={0} max={800} on:input={createNoise} /> <br />
+Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={createNoise} /> <br />
+Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={-100} max={100} on:input={createNoise} /> <br />
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
