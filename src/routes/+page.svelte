@@ -4,6 +4,7 @@
     import "$lib/styles/global.css";
     import transparencySquare from "$lib/images/transparency square.png";
     import seedrandom from "seedrandom";
+    import Slider from "$lib/Slider.svelte";
 
     let portal = "webapp";
 
@@ -48,6 +49,8 @@
 
     let spriteData = [];
     function createNoise() {
+        spriteData = [];
+
         let baseSprite = {
             x: userOptions["baseX"],
             y: userOptions["baseY"],
@@ -100,6 +103,11 @@
         {/each}
     </svg>
 </div>
+Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={createNoise} /> <br />
+Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={createNoise} /> <br />
+Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={createNoise} /> <br />
+Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={createNoise} /> <br />
+Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={0} max={800} on:input={createNoise} /> <br />
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
