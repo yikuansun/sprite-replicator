@@ -38,10 +38,10 @@
         hueVariance: 0,
         saturationVariance: 0,
         seed: 0,
-        focalDepth: 0,
-        depthOfField: 0,
+        focalDepth: 500,
+        fieldBlur: 10,
         fog: 20,
-        cameraZ: 500,
+        cameraZ: -500,
         vanishX: 960,
         vanishY: 540,
         viewFactor: 500,
@@ -81,9 +81,9 @@
 
     function point2d(point3d, cameraZ, viewFactor, vanishX, vanishY) {
         let pt = { x: 0, y: 0, scale: 1, };
-        pt.x = ((point3d["x"] - vanishX) / (point3d["z"] + cameraZ)) * viewFactor + vanishX;
-        pt.y = ((point3d["y"] - vanishY) / (point3d["z"] + cameraZ)) * viewFactor + vanishY;
-        pt.scale = point3d["scale"] / (point3d["z"] + cameraZ) * viewFactor;
+        pt.x = ((point3d["x"] - vanishX) / (point3d["z"] - cameraZ)) * viewFactor + vanishX;
+        pt.y = ((point3d["y"] - vanishY) / (point3d["z"] - cameraZ)) * viewFactor + vanishY;
+        pt.scale = point3d["scale"] / (point3d["z"] - cameraZ) * viewFactor;
         return pt;
     }
 </script>
@@ -99,7 +99,8 @@
                 cy={point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"])["y"]}
                 rx={25 * point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"])["scale"]}
                 ry={25 * point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"])["scale"]}
-                style:fill="hsl(0deg, 0%, {Math.max((sprite["z"] - userOptions["focalDepth"]) * userOptions["fog"] / 100, 0)}%)"
+                style:fill="hsl(0deg, 0%, {Math.max((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500, 0)}%)"
+                style:filter="blur({Math.abs((sprite["z"] - (userOptions["focalDepth"] + userOptions["cameraZ"])) * userOptions["fieldBlur"] / 500)}px)"
                 />
         {/each}
     </svg>
@@ -108,9 +109,9 @@ Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={c
 Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={createNoise} /> <br />
 Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={createNoise} /> <br />
 Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={createNoise} /> <br />
-Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={0} max={800} on:input={createNoise} /> <br />
+Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={createNoise} /> <br />
 Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={createNoise} /> <br />
-Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={-100} max={100} on:input={createNoise} /> <br />
+Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={createNoise} /> <br />
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
