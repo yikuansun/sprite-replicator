@@ -40,7 +40,7 @@
         saturationVariance: 0,
         seed: 0,
         focalDepth: 500,
-        fieldBlur: 10,
+        fieldBlur: 0,
         fog: 20,
         cameraZ: -500,
         vanishX: 960,
