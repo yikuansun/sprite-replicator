@@ -104,6 +104,7 @@
             let focalPlane = userOptions["focalDepth"] + userOptions["cameraZ"];
             ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)
                 contrast(${Math.max(100 - ((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500), 0)}%)`;
+            ctx.fillStyle = "red";
             ctx.fillRect(-width / 2, -height / 2, width, height);
         }
     }
@@ -114,7 +115,8 @@
     }
 </script>
 
-<canvas bind:this={outputCanvas} width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}></canvas>
+<canvas bind:this={outputCanvas} width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
+    style:background="url('{transparencySquare}') repeat"></canvas>
 
 <!-- svg for testing purposes only 
 <div style:width="800px" style:background-color="white">
