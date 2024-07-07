@@ -73,6 +73,7 @@
             dupSprite["x"] += rng2() * userOptions["xVariance"];
             dupSprite["y"] += rng2() * userOptions["yVariance"];
             dupSprite["z"] += rng2() * userOptions["zVariance"];
+            dupSprite["xyAngle"] += rng2() * userOptions["xyAngleVariance"];
             spriteData.push(dupSprite);
         }
 
@@ -99,8 +100,9 @@
             ctx.save();
             let pt = point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"]);
             ctx.translate(pt["x"], pt["y"]);
-            let width = 25 * pt["scale"];
-            let height = 25 * pt["scale"];
+            ctx.rotate(-sprite["xyAngle"] * Math.PI / 180);
+            let width = 50 * pt["scale"];
+            let height = 50 * pt["scale"];
             let focalPlane = userOptions["focalDepth"] + userOptions["cameraZ"];
             ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)
                 contrast(${Math.max(100 - ((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500), 0)}%)`;
@@ -142,6 +144,7 @@ Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:i
 Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
 Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
 Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
+Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
