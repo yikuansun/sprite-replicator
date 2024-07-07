@@ -12,6 +12,7 @@
         let searchParams = new URLSearchParams($page.url.searchParams);
         portal = searchParams.get("portal");
         createNoise();
+        renderPattern();
     });
 
     let outputCanvas;
@@ -84,13 +85,37 @@
         pt.x = ((point3d["x"] - vanishX) / (point3d["z"] - cameraZ)) * viewFactor + vanishX;
         pt.y = ((point3d["y"] - vanishY) / (point3d["z"] - cameraZ)) * viewFactor + vanishY;
         pt.scale = point3d["scale"] / (point3d["z"] - cameraZ) * viewFactor;
+        if (pt.scale < 0) pt.scale = 0;
         return pt;
+    }
+
+    function renderPattern() {
+        let ctx = outputCanvas.getContext("2d");
+        ctx.restore();
+        ctx.save();
+        ctx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+        for (let sprite of spriteData) {
+            ctx.restore();
+            ctx.save();
+            let pt = point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"]);
+            ctx.translate(pt["x"], pt["y"]);
+            let width = 25 * pt["scale"];
+            let height = 25 * pt["scale"];
+            let focalPlane = userOptions["focalDepth"] + userOptions["cameraZ"];
+            ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)`;
+            ctx.fillRect(-width / 2, -height / 2, width, height);
+        }
+    }
+
+    function tick() {
+        createNoise();
+        renderPattern();
     }
 </script>
 
-<canvas bind:this={outputCanvas} style:display="none"></canvas>
+<canvas bind:this={outputCanvas} width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}></canvas>
 
-<!-- svg for testing purposes only -->
+<!-- svg for testing purposes only 
 <div style:width="800px" style:background-color="white">
     <svg viewBox="0 0 1920 1080">
         {#each spriteData as sprite}
@@ -105,13 +130,15 @@
         {/each}
     </svg>
 </div>
-Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={createNoise} /> <br />
-Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={createNoise} /> <br />
-Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={createNoise} /> <br />
-Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={createNoise} /> <br />
-Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={createNoise} /> <br />
-Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={createNoise} /> <br />
-Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={createNoise} /> <br />
+-->
+<br />
+Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
+Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
+Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
+Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={tick} /> <br />
+Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
+Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
+Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
