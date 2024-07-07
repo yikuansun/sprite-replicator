@@ -65,6 +65,9 @@
             alpha: userOptions["baseAlpha"],
             textureIndex: 0,
             mass: userOptions["baseScale"],
+            exposure: 100,
+            saturation: 100,
+            hueRotate: 0,
         };
         spriteData.push(baseSprite);
 
@@ -85,6 +88,10 @@
             dupSprite["scale"] += dupSprite["scale"] * rng2() * userOptions["sizeVariance"];
             dupSprite["scale"] = Math.max(dupSprite["scale"], 0);
             dupSprite["mass"] = dupSprite["scale"] * (1 + rng2() * userOptions["densityVariance"]);
+            dupSprite["exposure"] -= rng() * userOptions["exposureVariance"];
+            dupSprite["saturation"] += rng2() * userOptions["saturationVariance"];
+            dupSprite["saturation"] = Math.max(dupSprite["saturation"], 0);
+            dupSprite["hueRotate"] += rng2() * userOptions["hueVariance"];
             spriteData.push(dupSprite);
         }
 
@@ -131,6 +138,15 @@
             let focalPlane = userOptions["focalDepth"] + userOptions["cameraZ"];
             ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)
                 contrast(${Math.max(100 - ((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500), 0)}%)`;
+            if (userOptions["exposureVariance"]) {
+                ctx.filter += ` brightness(${sprite["exposure"]}%)`;
+            }
+            if (userOptions["saturationVariance"]) {
+                ctx.filter += ` saturate(${sprite["saturation"]}%)`;
+            }
+            if (userOptions["hueVariance"]) {
+                ctx.filter += ` hue-rotate(${sprite["hueRotate"]}deg)`;
+            }
             ctx.fillStyle = "red";
             ctx.globalCompositeOperation = sprite["blendMode"];
             ctx.globalAlpha = sprite["alpha"];
