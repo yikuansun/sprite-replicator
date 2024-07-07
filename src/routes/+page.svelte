@@ -79,6 +79,8 @@
             dupSprite["z"] += rng2() * userOptions["zVariance"];
             dupSprite["xyAngle"] += rng2() * userOptions["xyAngleVariance"];
             dupSprite["textureIndex"] = Math.floor(rng() * userOptions["textureURLs"].length);
+            dupSprite["alpha"] += rng2() * userOptions["alphaVariance"];
+            dupSprite["alpha"] = Math.min(Math.max(dupSprite["alpha"], 0), 1);
             spriteData.push(dupSprite);
         }
 
@@ -126,6 +128,8 @@
             ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)
                 contrast(${Math.max(100 - ((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500), 0)}%)`;
             ctx.fillStyle = "red";
+            ctx.globalCompositeOperation = sprite["blendMode"];
+            ctx.globalAlpha = sprite["alpha"];
             ctx.drawImage(img, -width / 2, -height / 2, width, height);
         }
     }
