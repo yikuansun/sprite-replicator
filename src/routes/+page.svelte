@@ -64,6 +64,7 @@
             blendMode: userOptions["blendMode"],
             alpha: userOptions["baseAlpha"],
             textureIndex: 0,
+            mass: userOptions["baseScale"],
         };
         spriteData.push(baseSprite);
 
@@ -81,6 +82,9 @@
             dupSprite["textureIndex"] = Math.floor(rng() * userOptions["textureURLs"].length);
             dupSprite["alpha"] += rng2() * userOptions["alphaVariance"];
             dupSprite["alpha"] = Math.min(Math.max(dupSprite["alpha"], 0), 1);
+            dupSprite["scale"] += dupSprite["scale"] * rng2() * userOptions["sizeVariance"];
+            dupSprite["scale"] = Math.max(dupSprite["scale"], 0);
+            dupSprite["mass"] = dupSprite["scale"] * (1 + rng2() * userOptions["densityVariance"]);
             spriteData.push(dupSprite);
         }
 
@@ -168,6 +172,8 @@ Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} 
 Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
 Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
 Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
+Size Variance: <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+Base Scale: <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
