@@ -7,6 +7,7 @@
     import Slider from "$lib/Slider.svelte";
     import starTexture from "$lib/textures/Star.png";
     import orbTexture from "$lib/textures/Orb.png";
+    import canvasClickDrag from "$lib/canvasClickDrag.js";
 
     let portal = "webapp";
 
@@ -158,10 +159,24 @@
         createNoise();
         renderPattern();
     }
+
+    let draggingPos = false;
 </script>
 
-<canvas bind:this={outputCanvas} width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
-    style:background="url('{transparencySquare}') repeat"></canvas>
+<canvas bind:this={outputCanvas}
+    width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
+    style:background="url('{transparencySquare}') repeat"
+    on:wheel={(e) => {
+        e.preventDefault();
+        userOptions["cameraZ"] -= Math.floor(e.deltaY / 6);
+        tick();
+    }}
+    use:canvasClickDrag
+    on:clickDrag={(e) => {
+        userOptions["baseX"] = e.detail.x;
+        userOptions["baseY"] = e.detail.y;
+        tick();
+    }}></canvas>
 
 <!-- svg for testing purposes only 
 <div style:width="800px" style:background-color="white">
