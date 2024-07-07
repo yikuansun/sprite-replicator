@@ -102,7 +102,8 @@
             let width = 25 * pt["scale"];
             let height = 25 * pt["scale"];
             let focalPlane = userOptions["focalDepth"] + userOptions["cameraZ"];
-            ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)`;
+            ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)
+                contrast(${100 - Math.max((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500, 0)}%)`;
             ctx.fillRect(-width / 2, -height / 2, width, height);
         }
     }
