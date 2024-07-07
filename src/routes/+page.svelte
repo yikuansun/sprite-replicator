@@ -5,6 +5,8 @@
     import transparencySquare from "$lib/images/transparency square.png";
     import seedrandom from "seedrandom";
     import Slider from "$lib/Slider.svelte";
+    import starTexture from "$lib/textures/Star.png";
+    import orbTexture from "$lib/textures/Orb.png";
 
     let portal = "webapp";
 
@@ -46,6 +48,7 @@
         vanishX: 960,
         vanishY: 540,
         viewFactor: 500,
+        textureURLs: [starTexture],
     };
 
     let spriteData = [];
@@ -60,6 +63,7 @@
             xyAngle: userOptions["baseXyAngle"],
             blendMode: userOptions["blendMode"],
             alpha: userOptions["baseAlpha"],
+            textureIndex: 0,
         };
         spriteData.push(baseSprite);
 
@@ -74,6 +78,7 @@
             dupSprite["y"] += rng2() * userOptions["yVariance"];
             dupSprite["z"] += rng2() * userOptions["zVariance"];
             dupSprite["xyAngle"] += rng2() * userOptions["xyAngleVariance"];
+            dupSprite["textureIndex"] = Math.floor(rng() * userOptions["textureURLs"].length);
             spriteData.push(dupSprite);
         }
 
@@ -90,7 +95,20 @@
         return pt;
     }
 
-    function renderPattern() {
+    let imgCache = {};
+    async function loadImage(url) {
+        if (imgCache[url]) return imgCache[url];
+        return new Promise((res, rej) => {
+            let img = new Image();
+            img.addEventListener("load", () => {
+                imgCache[url] = img;
+                res(img);
+            });
+            img.src = url;
+        });
+    }
+
+    async function renderPattern() {
         let ctx = outputCanvas.getContext("2d");
         ctx.restore();
         ctx.save();
@@ -101,13 +119,14 @@
             let pt = point2d(sprite, userOptions["cameraZ"], userOptions["viewFactor"], userOptions["vanishX"], userOptions["vanishY"]);
             ctx.translate(pt["x"], pt["y"]);
             ctx.rotate(-sprite["xyAngle"] * Math.PI / 180);
-            let width = 50 * pt["scale"];
-            let height = 50 * pt["scale"];
+            let img = await loadImage(userOptions["textureURLs"][sprite["textureIndex"]]);
+            let width = img.width * pt["scale"];
+            let height = img.height * pt["scale"];
             let focalPlane = userOptions["focalDepth"] + userOptions["cameraZ"];
             ctx.filter = `blur(${Math.abs((sprite["z"] - focalPlane) * userOptions["fieldBlur"] / 500)}px)
                 contrast(${Math.max(100 - ((sprite["z"] - userOptions["cameraZ"]) * userOptions["fog"] / 500), 0)}%)`;
             ctx.fillStyle = "red";
-            ctx.fillRect(-width / 2, -height / 2, width, height);
+            ctx.drawImage(img, -width / 2, -height / 2, width, height);
         }
     }
 
