@@ -30,7 +30,7 @@
         baseZ: 0,
         baseScale: 1,
         baseXyAngle: 0,
-        blendMode: "normal",
+        blendMode: "source-over",
         baseAlpha: 1,
         dupCount: 20,
         xVariance: 500,
@@ -218,15 +218,48 @@
         Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
         Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
         Base Scale: <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+        Base Alpha: <Slider bind:value={userOptions["baseAlpha"]} min={0} max={1} step={0.01} on:input={tick} /> <br />
     </Collapsible>
     <Collapsible title="Duplicates">
-        Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={tick} /> <br />
+        Count: <Slider bind:value={userOptions["dupCount"]} min={0} max={100} on:input={tick} /> <br />
+        Blend Mode: <select bind:value={userOptions["blendMode"]} on:change={tick}>
+            <option value="source-over">Normal</option>
+            <option value="darken">Darken</option>
+            <option value="multiply">Multiply</option>
+            <option value="color-burn">Color Burn</option>
+            <option value="lighten">Lighten</option>
+            <option value="screen">Screen</option>
+            <option value="lighter">Add {"(Linear Dodge)"}</option>
+            <option value="color-dodge">Color Dodge</option>
+            <option value="overlay">Overlay</option>
+            <option value="soft-light">Soft Light</option>
+            <option value="hard-light">Hard Light</option>
+            <option value="difference">Difference</option>
+            <option value="exclusion">Exclusion</option>
+            <option value="hue">Hue</option>
+            <option value="saturation">Saturation</option>
+            <option value="color">Colour</option>
+            <option value="luminosity">Luminosity</option>
+        </select> <br />
+        X Variance: <Slider bind:value={userOptions["xVariance"]} min={0} max={1000} on:input={tick} /> <br />
+        Y Variance: <Slider bind:value={userOptions["yVariance"]} min={0} max={1000} on:input={tick} /> <br />
+        Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={450} on:input={tick} /> <br />
         Size Variance: <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+        Angle Variance {"(XY)"}: <Slider bind:value={userOptions["xyAngleVariance"]} min={0} max={180} on:input={tick} /> <br />
+        Alpha Variance: <Slider bind:value={userOptions["alphaVariance"]} min={0} max={1} step={0.01} on:input={tick} /> <br />
+        Exposure Variance: <Slider bind:value={userOptions["exposureVariance"]} min={0} max={100} on:input={tick} /> <br />
+        Hue Variance: <Slider bind:value={userOptions["hueVariance"]} min={0} max={180} on:input={tick} /> <br />
+        Saturation Variance: <Slider bind:value={userOptions["saturationVariance"]} min={0} max={100} on:input={tick} /> <br />
+        Random Seed: <Slider bind:value={userOptions["seed"]} min={0} max={12345} on:input={tick} /> <br />
     </Collapsible>
     <Collapsible title="Camera">
         Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
         Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
         Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
+        Field Blur: <Slider bind:value={userOptions["fieldBlur"]} min={0} max={25} on:input={tick} /> <br />
+    </Collapsible>
+    <Collapsible title="Forces">
+        Density Variance: <Slider bind:value={userOptions["densityVariance"]} min={0} max={1} step={0.01} on:input={tick} /> <br />
     </Collapsible>
 </div>
 

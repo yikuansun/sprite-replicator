@@ -187,3 +187,9 @@ option {
     float: right;
     accent-color: #69AA00;
 }
+
+#ctrlPanel select {
+    float: right;
+    vertical-align: middle;
+    margin-top: 4px;
+}
