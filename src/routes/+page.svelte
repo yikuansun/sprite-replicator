@@ -9,6 +9,7 @@
     import orbTexture from "$lib/textures/Orb.png";
     import canvasClickDrag from "$lib/canvasClickDrag.js";
     import Collapsible from "$lib/Collapsible.svelte";
+    import Square from "$lib/Square.svelte";
 
     let portal = "webapp";
 
@@ -162,12 +163,15 @@
     }
 
     let draggingPos = false;
+
+    let previewBg = "transparent";
 </script>
 
 <div id="previewSpace">
     <canvas bind:this={outputCanvas}
         width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
-        style:background="url('{transparencySquare}') repeat"
+        style:background={(previewBg == "transparent")?`url('${transparencySquare}') repeat`:previewBg}
+        style:transition="background 0.2s"
         on:wheel={(e) => {
             e.preventDefault();
             userOptions["cameraZ"] -= Math.floor(e.deltaY / 6);
@@ -179,8 +183,8 @@
             userOptions["baseY"] = e.detail.y;
             tick();
         }}
-        style:max-width="calc(100% - 50px)"
-        style:max-height="calc(100% - 50px)"
+        style:max-width="calc(100% - 70px)"
+        style:max-height="calc(100% - 70px)"
         style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"></canvas>
 </div>
 
@@ -218,6 +222,12 @@
         Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
         Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
     </Collapsible>
+</div>
+
+<div id="bgColorPicker">
+    <Square sideLength={16} fill="white" style={(previewBg == "white")?"outline-width: 3px;":""} on:click={() => { previewBg = "white"; }} />
+    <Square sideLength={16} fill="url('{transparencySquare}')" style={(previewBg == "transparent")?"outline-width: 3px;":""} on:click={() => { previewBg = "transparent"; }} />
+    <Square sideLength={16} fill="black" style={(previewBg == "black")?"outline-width: 3px;":""} on:click={() => { previewBg = "black"; }} />
 </div>
 
 {#if portal == "photopea"}
