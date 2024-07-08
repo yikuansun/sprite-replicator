@@ -168,9 +168,15 @@
 </script>
 
 <div id="previewSpace">
+    <canvas width={userOptions["imageWidth"]}
+        height={userOptions["imageHeight"]}
+        style:max-width="calc(100% - 70px)"
+        style:max-height="calc(100% - 70px)"
+        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"
+        style:background="url('{transparencySquare}') repeat"></canvas>
     <canvas bind:this={outputCanvas}
         width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
-        style:background={(previewBg == "transparent")?`url('${transparencySquare}') repeat`:previewBg}
+        style:background={previewBg}
         style:transition="background 0.2s"
         on:wheel={(e) => {
             e.preventDefault();
