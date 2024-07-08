@@ -178,3 +178,8 @@ option {
     width: calc(100vw - 400px);
     text-align: center;
 }
+
+#ctrlPanel slider {
+    float: right;
+    accent-color: #69AA00;
+}
