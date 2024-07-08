@@ -8,6 +8,7 @@
     import starTexture from "$lib/textures/Star.png";
     import orbTexture from "$lib/textures/Orb.png";
     import canvasClickDrag from "$lib/canvasClickDrag.js";
+    import Collapsible from "$lib/Collapsible.svelte";
 
     let portal = "webapp";
 
@@ -201,16 +202,22 @@
 -->
 <br />
 <div id="ctrlPanel">
-    Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
-    Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
-    Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
-    Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={tick} /> <br />
-    Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
-    Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
-    Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
-    Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
-    Size Variance: <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
-    Base Scale: <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+    <Collapsible title="Base" collapsed={false}>
+        Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
+        Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
+        Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
+        Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
+        Base Scale: <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+    </Collapsible>
+    <Collapsible title="Duplicates">
+        Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={tick} /> <br />
+        Size Variance: <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+    </Collapsible>
+    <Collapsible title="Camera">
+        Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
+        Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
+        Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
+    </Collapsible>
 </div>
 
 {#if portal == "photopea"}
