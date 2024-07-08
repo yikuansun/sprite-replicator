@@ -163,20 +163,25 @@
     let draggingPos = false;
 </script>
 
-<canvas bind:this={outputCanvas}
-    width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
-    style:background="url('{transparencySquare}') repeat"
-    on:wheel={(e) => {
-        e.preventDefault();
-        userOptions["cameraZ"] -= Math.floor(e.deltaY / 6);
-        tick();
-    }}
-    use:canvasClickDrag
-    on:clickDrag={(e) => {
-        userOptions["baseX"] = e.detail.x;
-        userOptions["baseY"] = e.detail.y;
-        tick();
-    }}></canvas>
+<div id="previewSpace">
+    <canvas bind:this={outputCanvas}
+        width={userOptions["imageWidth"]} height={userOptions["imageHeight"]}
+        style:background="url('{transparencySquare}') repeat"
+        on:wheel={(e) => {
+            e.preventDefault();
+            userOptions["cameraZ"] -= Math.floor(e.deltaY / 6);
+            tick();
+        }}
+        use:canvasClickDrag
+        on:clickDrag={(e) => {
+            userOptions["baseX"] = e.detail.x;
+            userOptions["baseY"] = e.detail.y;
+            tick();
+        }}
+        style:max-width="calc(100% - 50px)"
+        style:max-height="calc(100% - 50px)"
+        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"></canvas>
+</div>
 
 <!-- svg for testing purposes only 
 <div style:width="800px" style:background-color="white">
@@ -195,16 +200,18 @@
 </div>
 -->
 <br />
-Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
-Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
-Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
-Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={tick} /> <br />
-Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
-Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
-Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
-Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
-Size Variance: <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
-Base Scale: <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+<div id="ctrlPanel">
+    Base X: <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
+    Base Y: <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
+    Base Z: <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
+    Z Variance: <Slider bind:value={userOptions["zVariance"]} min={0} max={300} on:input={tick} /> <br />
+    Camera Distance: <Slider bind:value={userOptions["cameraZ"]} min={-800} max={0} on:input={tick} /> <br />
+    Fog: <Slider bind:value={userOptions["fog"]} min={0} max={100} on:input={tick} /> <br />
+    Focal Depth: <Slider bind:value={userOptions["focalDepth"]} min={0} max={1000} on:input={tick} /> <br />
+    Base Angle {"(XY)"}: <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
+    Size Variance: <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+    Base Scale: <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
+</div>
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
