@@ -136,10 +136,10 @@ option {
 
 #previewSpace {
     position: fixed;
-    top: 0;
+    top: 32px;
     left: 0;
     width: calc(100vw - 400px);
-    height: 100vh;
+    height: calc(100vh - 32px);
 }
 
 ::-webkit-scrollbar {
@@ -164,6 +164,9 @@ option {
     outline-color: #00AA00;
     outline-width: 0;
     transition: outline-color 0.1s, outline-width 0.1s;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #bgColorPicker .square:hover {
@@ -173,9 +176,10 @@ option {
 
 #bgColorPicker {
     position: fixed;
-    top: 10px;
+    top: 0;
     left: 0;
     width: calc(100vw - 400px);
+    height: 32px;
     text-align: center;
 }
 
