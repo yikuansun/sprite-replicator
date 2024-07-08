@@ -193,3 +193,29 @@ option {
     vertical-align: middle;
     margin-top: 4px;
 }
+
+@media screen and (max-width: 600px) {
+    #bgColorPicker {
+        width: 100vw;
+    }
+
+    #previewSpace {
+        width: 100vw;
+        height: calc(50vh - 32px);
+    }
+
+    #ctrlPanel {
+        height: 50vh;
+        width: 100vw;
+        top: 50vh;
+        font-size: 12px;
+    }
+
+    slider input[type=range] {
+        width: 80px!important;
+    }
+
+    slider input[type=number] {
+        width: 40px!important;
+    }
+}
