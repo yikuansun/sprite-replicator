@@ -52,6 +52,10 @@
         vanishY: 540,
         viewFactor: 500,
         textureURLs: [starTexture],
+        gridSnap: 0,
+        gravityXyAngle: 270,
+        gravityAmount: 0,
+        gravityFading: 0,
     };
 
     let spriteData = [];
@@ -87,7 +91,6 @@
             dupSprite["xyAngle"] += rng2() * userOptions["xyAngleVariance"];
             dupSprite["textureIndex"] = Math.floor(rng() * userOptions["textureURLs"].length);
             dupSprite["alpha"] += rng2() * userOptions["alphaVariance"];
-            dupSprite["alpha"] = Math.min(Math.max(dupSprite["alpha"], 0), 1);
             dupSprite["scale"] += dupSprite["scale"] * rng2() * userOptions["sizeVariance"];
             dupSprite["scale"] = Math.max(dupSprite["scale"], 0);
             dupSprite["mass"] = dupSprite["scale"] * (1 + rng2() * userOptions["densityVariance"]);
@@ -95,8 +98,17 @@
             dupSprite["saturation"] += rng2() * userOptions["saturationVariance"];
             dupSprite["saturation"] = Math.max(dupSprite["saturation"], 0);
             dupSprite["hueRotate"] += rng2() * userOptions["hueVariance"];
+            dupSprite["x"] += dupSprite["mass"] * userOptions["gravityAmount"] * Math.cos(userOptions["gravityXyAngle"] * Math.PI / 180);
+            dupSprite["y"] -= dupSprite["mass"] * userOptions["gravityAmount"] * Math.sin(userOptions["gravityXyAngle"] * Math.PI / 180);
+            dupSprite["alpha"] *= (1 - userOptions["gravityFading"] * dupSprite["mass"]);
+            dupSprite["alpha"] = Math.min(Math.max(dupSprite["alpha"], 0), 1);
             spriteData.push(dupSprite);
         }
+
+        baseSprite["x"] += baseSprite["mass"] * userOptions["gravityAmount"] * Math.cos(userOptions["gravityXyAngle"] * Math.PI / 180);
+        baseSprite["y"] -= baseSprite["mass"] * userOptions["gravityAmount"] * Math.sin(userOptions["gravityXyAngle"] * Math.PI / 180);
+        baseSprite["alpha"] *= (1 - userOptions["gravityFading"] * baseSprite["mass"]);
+        baseSprite["alpha"] = Math.min(Math.max(baseSprite["alpha"], 0), 1);
 
         spriteData.sort((a, b) => { return b.z - a.z; });
         spriteData = spriteData;
@@ -259,7 +271,11 @@
         Field Blur <Slider bind:value={userOptions["fieldBlur"]} min={0} max={25} on:input={tick} /> <br />
     </Collapsible>
     <Collapsible title="Forces">
+        Grid Snap <Slider bind:value={userOptions["gridSnap"]} min={0} max={100} on:input={tick} /> <br />
+        Gravity Amount <Slider bind:value={userOptions["gravityAmount"]} min={0} max={400} on:input={tick} /> <br />
+        Gravity Angle {"(XY)"} <Slider bind:value={userOptions["gravityXyAngle"]} min={0} max={360} on:input={tick} /> <br />
         Density Variance <Slider bind:value={userOptions["densityVariance"]} min={0} max={1} step={0.01} on:input={tick} /> <br />
+        Mass Fading <Slider bind:value={userOptions["gravityFading"]} min={0} max={1} step={0.01} on:input={tick} /> <br />
     </Collapsible>
 </div>
 
