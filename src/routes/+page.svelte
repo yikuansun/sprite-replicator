@@ -19,6 +19,8 @@
     import canvasClickDrag from "$lib/canvasClickDrag.js";
     import Collapsible from "$lib/Collapsible.svelte";
     import Square from "$lib/Square.svelte";
+    import Photopea from "$lib/photopea.js";
+    import base64ArrayBuffer from "$lib/base64ArrayBuffer.js";
 
     let portal = "webapp";
 
@@ -257,11 +259,33 @@
                     if (e.target.value == "custom") {
                         fileInputs[i].click();
                     }
+                    else if (e.target.value == "smartObject") {
+                        Photopea.runScript(window.parent, `
+                            app.echoToOE(app.activeDocument.activeLayer.kind == 1);
+                        `).then(async (data) => {
+                            if (data[0]) {
+                                await Photopea.runScript(window.parent, `executeAction(stringIDToTypeID("placedLayerEditContents"));`);
+                                let buff = "done";
+                                do {
+                                    buff = (await Photopea.runScript(window.parent, `app.activeDocument.saveToOE("png");`))[0];
+                                } while (buff == "done");
+                                await Photopea.runScript(window.parent, `app.activeDocument.close();`);
+                                userOptions["textureURLs"][i] = "data:image/png;base64," + base64ArrayBuffer(buff);
+                                tick();
+                            }
+                            else {
+                                await Photopea.runScript(window.parent, `alert("Selected layer must be smart object.");`);
+                            }
+                        });
+                    }
                     else {
                         tick();
                     }
                 }} style:float="none">
-                <option value="custom">Custom</option>
+                <option value="custom">Import File</option>
+                {#if portal == "photopea"}
+                    <option value="smartObject">Use Current Layer</option>
+                {/if}
                 <optgroup label="Built-in Textures">
                     <option value={matrixTexture}>Bit Rain</option>
                     <option value={bokehTexture}>Bokeh</option>
