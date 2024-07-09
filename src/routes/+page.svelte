@@ -29,6 +29,18 @@
         portal = searchParams.get("portal");
         createNoise();
         renderPattern();
+        if (portal == "photopea") {
+            Photopea.runScript(window.parent,
+                `app.echoToOE(app.activeDocument.width.toString());
+                app.echoToOE(app.activeDocument.height.toString());`).then((wh) => {
+                userOptions["imageWidth"] = wh[0];
+                userOptions["imageHeight"] = wh[1];
+                userOptions["vanishX"] = userOptions["imageWidth"] / 2;
+                userOptions["baseX"] = userOptions["imageWidth"] / 2;
+                userOptions["vanishY"] = userOptions["imageHeight"] / 2;
+                userOptions["baseY"] = userOptions["imageHeight"] / 2;
+            });
+        }
     });
 
     let outputCanvas;
