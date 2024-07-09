@@ -192,6 +192,7 @@
     let exportButtonReal;
 
     let fileInputs = {};
+    let selectPrevValues = {};
 </script>
 
 <div id="previewSpace">
@@ -255,11 +256,16 @@
                     fR.readAsDataURL(file);
                 }} />
             <select bind:value={userOptions["textureURLs"][i]}
+                on:focus={(e) => {
+                    selectPrevValues[i] = userOptions["textureURLs"][i];
+                }}
                 on:change={(e) => {
                     if (e.target.value == "custom") {
+                        userOptions["textureURLs"][i] = selectPrevValues[i];
                         fileInputs[i].click();
                     }
                     else if (e.target.value == "smartObject") {
+                        userOptions["textureURLs"][i] = selectPrevValues[i];
                         Photopea.runScript(window.parent, `
                             app.echoToOE(app.activeDocument.activeLayer.kind == 1);
                         `).then(async (data) => {
@@ -281,6 +287,7 @@
                     else {
                         tick();
                     }
+                    selectPrevValues[i] = userOptions["textureURLs"][i];
                 }} style:float="none">
                 <option value="custom">Import File</option>
                 {#if portal == "photopea"}
