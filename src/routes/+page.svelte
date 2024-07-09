@@ -68,10 +68,10 @@
         exposureVariance: 0,
         hueVariance: 0,
         saturationVariance: 0,
-        seed: 0,
+        seed: 414,
         focalDepth: 500,
         fieldBlur: 0,
-        fog: 20,
+        fog: 0,
         cameraZ: -500,
         vanishX: 960,
         vanishY: 540,
@@ -337,8 +337,8 @@
         }} style:padding="3px 10px">+</button>
     </Collapsible>
     <Collapsible title="Base" collapsed={false}>
-        X <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
-        Y <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
+        X <Slider bind:value={userOptions["baseX"]} min={0} max={userOptions["imageWidth"]} on:input={tick} /> <br />
+        Y <Slider bind:value={userOptions["baseY"]} min={0} max={userOptions["imageHeight"]} on:input={tick} /> <br />
         Z <Slider bind:value={userOptions["baseZ"]} min={-300} max={300} on:input={tick} /> <br />
         Angle {"(XY)"} <Slider bind:value={userOptions["baseXyAngle"]} min={0} max={360} on:input={tick} /> <br />
         Scale <Slider bind:value={userOptions["baseScale"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
@@ -365,8 +365,8 @@
             <option value="color">Colour</option>
             <option value="luminosity">Luminosity</option>
         </select> <br />
-        X Variance <Slider bind:value={userOptions["xVariance"]} min={0} max={1000} on:input={tick} /> <br />
-        Y Variance <Slider bind:value={userOptions["yVariance"]} min={0} max={1000} on:input={tick} /> <br />
+        X Variance <Slider bind:value={userOptions["xVariance"]} min={0} max={userOptions["imageWidth"]} on:input={tick} /> <br />
+        Y Variance <Slider bind:value={userOptions["yVariance"]} min={0} max={userOptions["imageHeight"]} on:input={tick} /> <br />
         Z Variance <Slider bind:value={userOptions["zVariance"]} min={0} max={450} on:input={tick} /> <br />
         Size Variance <Slider bind:value={userOptions["sizeVariance"]} min={0} max={3} step={0.01} on:input={tick} /> <br />
         Angle Variance {"(XY)"} <Slider bind:value={userOptions["xyAngleVariance"]} min={0} max={180} on:input={tick} /> <br />
