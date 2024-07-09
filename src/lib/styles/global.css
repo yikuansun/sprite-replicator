@@ -215,10 +215,16 @@ option {
     }
 
     #ctrlPanel {
-        height: 50vh;
+        height: calc(50vh - 40px);
         width: 100vw;
         top: 50vh;
         font-size: 12px;
+    }
+
+    #exportPanel {
+        width: 100vw;
+        height: 40px;
+        line-height: 40px;
     }
 
     slider input[type=range] {
