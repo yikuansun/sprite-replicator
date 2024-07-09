@@ -127,6 +127,18 @@
             dupSprite["y"] -= dupSprite["mass"] * userOptions["gravityAmount"] * Math.sin(userOptions["gravityXyAngle"] * Math.PI / 180);
             dupSprite["alpha"] *= (1 - userOptions["gravityFading"] * dupSprite["mass"]);
             dupSprite["alpha"] = Math.min(Math.max(dupSprite["alpha"], 0), 1);
+            if (userOptions["gridSnap"] > 0) {
+                let snapAmnt = userOptions["gridSnap"];
+                let offsetX = dupSprite["x"] - baseSprite["x"];
+                let offsetY = dupSprite["y"] - baseSprite["y"];
+                let offsetZ = dupSprite["z"] - baseSprite["z"];
+                offsetX = Math.round(offsetX / snapAmnt) * snapAmnt;
+                offsetY = Math.round(offsetY / snapAmnt) * snapAmnt;
+                offsetZ = Math.round(offsetZ / snapAmnt) * snapAmnt;
+                dupSprite["x"] = baseSprite["x"] + offsetX;
+                dupSprite["y"] = baseSprite["y"] + offsetY;
+                dupSprite["z"] = baseSprite["z"] + offsetZ;
+            }
             spriteData.push(dupSprite);
         }
 
@@ -383,7 +395,7 @@
         Field Blur <Slider bind:value={userOptions["fieldBlur"]} min={0} max={25} on:input={tick} /> <br />
     </Collapsible>
     <Collapsible title="Forces">
-        Grid Snap <Slider bind:value={userOptions["gridSnap"]} min={0} max={100} on:input={tick} /> <br />
+        Grid Snap <Slider bind:value={userOptions["gridSnap"]} min={0} max={200} on:input={tick} /> <br />
         Gravity Amount <Slider bind:value={userOptions["gravityAmount"]} min={0} max={400} on:input={tick} /> <br />
         Gravity Angle {"(XY)"} <Slider bind:value={userOptions["gravityXyAngle"]} min={0} max={360} on:input={tick} /> <br />
         Density Variance <Slider bind:value={userOptions["densityVariance"]} min={0} max={1} step={0.01} on:input={tick} /> <br />
