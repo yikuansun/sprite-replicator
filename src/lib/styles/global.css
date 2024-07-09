@@ -139,7 +139,7 @@ option {
     top: 32px;
     left: 0;
     width: calc(100vw - 400px);
-    height: calc(100vh - 32px);
+    height: calc(100vh - 32px - 60px);
 }
 
 ::-webkit-scrollbar {
@@ -192,6 +192,16 @@ option {
     float: right;
     vertical-align: middle;
     margin-top: 4px;
+}
+
+#exportPanel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: calc(100vw - 400px);
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
 }
 
 @media screen and (max-width: 600px) {

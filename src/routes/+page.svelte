@@ -177,6 +177,8 @@
     let draggingPos = false;
 
     let previewBg = "transparent";
+
+    let exportButtonReal;
 </script>
 
 <div id="previewSpace">
@@ -283,6 +285,18 @@
     <Square sideLength={16} fill="white" style={(previewBg == "white")?"outline-width: 3px;":""} on:click={() => { previewBg = "white"; }} />
     <Square sideLength={16} fill="url('{transparencySquare}')" style={(previewBg == "transparent")?"outline-width: 3px;":""} on:click={() => { previewBg = "transparent"; }} />
     <Square sideLength={16} fill="black" style={(previewBg == "black")?"outline-width: 3px;":""} on:click={() => { previewBg = "black"; }} />
+</div>
+
+<div id="exportPanel">
+    <span style="display: inline-block; vertical-align: middle;">
+        <button on:click={() => {
+            exportButtonReal.href = outputCanvas.toDataURL();
+            exportButtonReal.click();
+        }}>
+            Export
+        </button>
+        <a bind:this={exportButtonReal} href="https://bit.ly/dumbguypng" download="sprite-replicator-output.png" style:display="none">hi guys</a>
+    </span>
 </div>
 
 {#if portal == "photopea"}
