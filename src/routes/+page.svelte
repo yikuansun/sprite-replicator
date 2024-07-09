@@ -7,6 +7,15 @@
     import Slider from "$lib/Slider.svelte";
     import starTexture from "$lib/textures/Star.png";
     import orbTexture from "$lib/textures/Orb.png";
+    import matrixTexture from "$lib/textures/Bit Rain.png";
+    import bokehTexture from "$lib/textures/Bokeh.png";
+    import debrisTexture from "$lib/textures/Debris.png";
+    import lensFlareTexture from "$lib/textures/Lens Flare.png";
+    import plasmaTexture from "$lib/textures/Plasma.png";
+    import smokeTexture from "$lib/textures/Smoke.png";
+    import starfieldTexture from "$lib/textures/Starfield.png";
+    import explosionTexture from "$lib/textures/Explosion.png";
+    import cosmicEnergyTexture from "$lib/textures/Cosmic Energy.png";
     import canvasClickDrag from "$lib/canvasClickDrag.js";
     import Collapsible from "$lib/Collapsible.svelte";
     import Square from "$lib/Square.svelte";
@@ -179,6 +188,8 @@
     let previewBg = "transparent";
 
     let exportButtonReal;
+
+    let fileInputs = {};
 </script>
 
 <div id="previewSpace">
@@ -226,6 +237,59 @@
 -->
 <br />
 <div id="ctrlPanel">
+    <Collapsible title="Textures" collapsed={true}>
+        {#each userOptions["textureURLs"] as tex, i}
+            <input bind:this={fileInputs[i]}
+                type="file" accept="image/*"
+                style:display="none"
+                on:input={(e) => {
+                    if (!e.target.files.length) return;
+                    let file = e.target.files[0];
+                    let fR = new FileReader();
+                    fR.addEventListener("loadend", (e2) => {
+                        userOptions["textureURLs"][i] = e2.target.result;
+                        tick();
+                    });
+                    fR.readAsDataURL(file);
+                }} />
+            <select bind:value={userOptions["textureURLs"][i]}
+                on:change={(e) => {
+                    if (e.target.value == "custom") {
+                        fileInputs[i].click();
+                    }
+                    else {
+                        tick();
+                    }
+                }} style:float="none">
+                <option value="custom">Custom</option>
+                <optgroup label="Built-in Textures">
+                    <option value={matrixTexture}>Bit Rain</option>
+                    <option value={bokehTexture}>Bokeh</option>
+                    <option value={cosmicEnergyTexture}>Cosmic Energy</option>
+                    <option value={debrisTexture}>Debris</option>
+                    <option value={explosionTexture}>Explosion</option>
+                    <option value={lensFlareTexture}>Lens Flare</option>
+                    <option value={orbTexture}>Orb</option>
+                    <option value={plasmaTexture}>Plasma</option>
+                    <option value={smokeTexture}>Smoke</option>
+                    <option value={starTexture}>Star</option>
+                    <option value={starfieldTexture}>Starfield</option>
+                </optgroup>
+            </select>
+            {#if i > 0}
+                <button on:click={() => {
+                    userOptions["textureURLs"].splice(i, 1);
+                    userOptions["textureURLs"] = userOptions["textureURLs"];
+                    tick();
+                }} style:padding="2px 8px">-</button>
+            {/if}
+            <br />
+        {/each}
+        <button on:click={() => {
+            userOptions["textureURLs"] = [...userOptions["textureURLs"], starTexture];
+            tick();
+        }} style:padding="3px 10px">+</button>
+    </Collapsible>
     <Collapsible title="Base" collapsed={false}>
         X <Slider bind:value={userOptions["baseX"]} min={0} max={1920} on:input={tick} /> <br />
         Y <Slider bind:value={userOptions["baseY"]} min={0} max={1080} on:input={tick} /> <br />
