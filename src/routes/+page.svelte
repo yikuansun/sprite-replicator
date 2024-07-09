@@ -16,6 +16,7 @@
     import starfieldTexture from "$lib/textures/Starfield.png";
     import explosionTexture from "$lib/textures/Explosion.png";
     import cosmicEnergyTexture from "$lib/textures/Cosmic Energy.png";
+    import strobeTexture from "$lib/textures/Strobe.png";
     import canvasClickDrag from "$lib/canvasClickDrag.js";
     import Collapsible from "$lib/Collapsible.svelte";
     import Square from "$lib/Square.svelte";
@@ -318,6 +319,7 @@
                     <option value={smokeTexture}>Smoke</option>
                     <option value={starTexture}>Star</option>
                     <option value={starfieldTexture}>Starfield</option>
+                    <option value={strobeTexture}>Strobe</option>
                 </optgroup>
             </select>
             {#if i > 0}
