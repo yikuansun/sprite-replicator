@@ -379,7 +379,12 @@
     <span style="display: inline-block; vertical-align: middle;">
         <button on:click={() => {
             exportButtonReal.href = outputCanvas.toDataURL();
-            exportButtonReal.click();
+            if (portal == "photopea") {
+                Photopea.runScript(window.parent, `
+                    app.open("${exportButtonReal.href}", null, true);
+                `);
+            }
+            else exportButtonReal.click();
         }}>
             Export
         </button>
