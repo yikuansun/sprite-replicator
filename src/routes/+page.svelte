@@ -435,7 +435,7 @@
                     }} on:change={tick} style:width="60px" />
             </label> <br />
             <br />
-            <button on:click={() => { startScreenVisible = false; }}>Go</button>
+            <button on:click={() => { tick(); startScreenVisible = false; }}>Go</button>
         </div>
     </div>
 {/if}
