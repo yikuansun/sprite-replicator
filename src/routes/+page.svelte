@@ -39,6 +39,7 @@
                 userOptions["baseX"] = userOptions["imageWidth"] / 2;
                 userOptions["vanishY"] = userOptions["imageHeight"] / 2;
                 userOptions["baseY"] = userOptions["imageHeight"] / 2;
+                tick();
             });
         }
     });
