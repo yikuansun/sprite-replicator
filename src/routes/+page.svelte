@@ -185,7 +185,7 @@
         renderPattern();
     }
 
-    let draggingPos = false;
+    let startScreenVisible = true;
 
     let previewBg = "transparent";
 
@@ -391,6 +391,34 @@
         <a bind:this={exportButtonReal} href="https://bit.ly/dumbguypng" download="sprite-replicator-output.png" style:display="none">hi guys</a>
     </span>
 </div>
+
+{#if startScreenVisible}
+    <div id="startScreen">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+            style:text-align="center">
+            <b>SPRITE REPLICATOR</b> <br />
+            <br />
+            <label>
+                Image Width:
+                <input type="number" bind:value={userOptions["imageWidth"]}
+                    on:input={() => {
+                        userOptions["vanishX"] = userOptions["imageWidth"] / 2;
+                        userOptions["baseX"] = userOptions["imageWidth"] / 2;
+                    }} on:change={tick} style:width="60px" />
+            </label> <br />
+            <label>
+                Image Height:
+                <input type="number" bind:value={userOptions["imageHeight"]}
+                    on:input={() => {
+                        userOptions["vanishY"] = userOptions["imageHeight"] / 2;
+                        userOptions["baseY"] = userOptions["imageHeight"] / 2;
+                    }} on:change={tick} style:width="60px" />
+            </label> <br />
+            <br />
+            <button on:click={() => { startScreenVisible = false; }}>Go</button>
+        </div>
+    </div>
+{/if}
 
 {#if portal == "photopea"}
     <!--photopea plugin-->
