@@ -15,12 +15,6 @@
     transform: translate(-50%, -50%);
 }
 
-@media only screen and (max-width: 690px) {
-    canvas {
-        width: 100%;
-    }
-}
-
 body {
     background-color: #222222;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
