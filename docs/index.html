@@ -2,31 +2,50 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/sprite-replicator/favicon.png" />
+		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
-		<link rel="modulepreload" href="/sprite-replicator/_app/immutable/entry/start.Zt7wjDev.js">
-		<link rel="modulepreload" href="/sprite-replicator/_app/immutable/chunks/entry.DDP344tn.js">
-		<link rel="modulepreload" href="/sprite-replicator/_app/immutable/chunks/scheduler.BQlqn0uB.js">
-		<link rel="modulepreload" href="/sprite-replicator/_app/immutable/entry/app.DqlaUB3u.js">
-		<link rel="modulepreload" href="/sprite-replicator/_app/immutable/chunks/index.BtW2a5Tr.js">
+		<link href="./_app/immutable/assets/2.DCEMjLv1.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.DPFDfoa2.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.Cn-54_Bi.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.BQlqn0uB.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.B_x_JVHP.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.BtW2a5Tr.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.CdVQCTLc.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.BwdUx3nN.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/stores.DKpimq04.js">
 	</head>
 	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">
+		<div style="display: contents">  <div id="previewSpace"><canvas width="1920" height="1080" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: calc(100% - 70px); max-height: calc(100% - 70px); background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFJiYmQEBASXX29wAAABRJREFUeJxjYLD/wEAM/n+AgRgMACSCHU0RydcxAAAAAElFTkSuQmCC') repeat;"></canvas> <canvas width="1920" height="1080" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: transparent; transition: background 0.2s; max-width: calc(100% - 70px); max-height: calc(100% - 70px);"></canvas></div>  <br> <div id="ctrlPanel"><div id="nameTag" class="svelte-y43j12"><div style="display: inline-block; width: 5px; height: 5px; border-bottom: 2px solid white; border-right: 2px solid white; transform: rotate(-45deg); transition: transform 400ms; position: relative; z-index: -1; margin-bottom: 2px; margin-left: 7px; margin-right: 5px;"></div> <b>Textures</b></div>  <div id="nameTag" class="svelte-y43j12"><div style="display: inline-block; width: 5px; height: 5px; border-bottom: 2px solid white; border-right: 2px solid white; transform: rotate(45deg); transition: transform 400ms; position: relative; z-index: -1; margin-bottom: 2px; margin-left: 7px; margin-right: 5px;"></div> <b>Base</b></div> <div id="contents" class="svelte-y43j12">X <slider><input type="range" min="0" max="1920" step="1" class="svelte-169olcs" value="960"> <input type="number" step="1" class="svelte-169olcs" value="960"></slider>  <br>
+        Y <slider><input type="range" min="0" max="1080" step="1" class="svelte-169olcs" value="540"> <input type="number" step="1" class="svelte-169olcs" value="540"></slider>  <br>
+        Z <slider><input type="range" min="-300" max="300" step="1" class="svelte-169olcs" value="0"> <input type="number" step="1" class="svelte-169olcs" value="0"></slider>  <br>
+        Angle (XY) <slider><input type="range" min="0" max="360" step="1" class="svelte-169olcs" value="0"> <input type="number" step="1" class="svelte-169olcs" value="0"></slider>  <br>
+        Scale <slider><input type="range" min="0" max="3" step="0.01" class="svelte-169olcs" value="1"> <input type="number" step="0.01" class="svelte-169olcs" value="1"></slider>  <br>
+        Alpha <slider><input type="range" min="0" max="1" step="0.01" class="svelte-169olcs" value="1"> <input type="number" step="0.01" class="svelte-169olcs" value="1"></slider>  <br></div> <div id="nameTag" class="svelte-y43j12"><div style="display: inline-block; width: 5px; height: 5px; border-bottom: 2px solid white; border-right: 2px solid white; transform: rotate(-45deg); transition: transform 400ms; position: relative; z-index: -1; margin-bottom: 2px; margin-left: 7px; margin-right: 5px;"></div> <b>Duplicates</b></div>  <div id="nameTag" class="svelte-y43j12"><div style="display: inline-block; width: 5px; height: 5px; border-bottom: 2px solid white; border-right: 2px solid white; transform: rotate(-45deg); transition: transform 400ms; position: relative; z-index: -1; margin-bottom: 2px; margin-left: 7px; margin-right: 5px;"></div> <b>Camera</b></div>  <div id="nameTag" class="svelte-y43j12"><div style="display: inline-block; width: 5px; height: 5px; border-bottom: 2px solid white; border-right: 2px solid white; transform: rotate(-45deg); transition: transform 400ms; position: relative; z-index: -1; margin-bottom: 2px; margin-left: 7px; margin-right: 5px;"></div> <b>Forces</b></div> </div> <div id="bgColorPicker"><div style="width: 16px; height: 16px; background: white; background-size: contain; display: inline-block;" class="square"></div> <div style="outline-width: 3px; width: 16px; height: 16px; background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFJiYmQEBASXX29wAAABRJREFUeJxjYLD/wEAM/n+AgRgMACSCHU0RydcxAAAAAElFTkSuQmCC'); background-size: contain; display: inline-block;" class="square"></div> <div style="width: 16px; height: 16px; background: black; background-size: contain; display: inline-block;" class="square"></div></div> <div id="exportPanel"><span style="display: inline-block; vertical-align: middle;"><button data-svelte-h="svelte-1r7hf79">Export</button> <a href="https://bit.ly/dumbguypng" download="sprite-replicator-output.png" style="display: none;" data-svelte-h="svelte-nyljsw">hi guys</a></span></div> <div id="startScreen" style="background-image: url('/_app/immutable/assets/splash.CV9SSy14.jpg');"><div style="position: absolute; right: 0; top: 0; width: 500px; height: 100vh; max-width: 100vw; background-color: #222222;"><div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;"><b style="letter-spacing: 2px;" data-svelte-h="svelte-obrfx0">SPRITE REPLICATOR</b> <br> <br> <label>Image Width:
+                    <input type="number" style="width: 60px;" value="1920"></label> <br> <label>Image Height:
+                    <input type="number" style="width: 60px;" value="1080"></label> <br> <br> <button data-svelte-h="svelte-lf1ocg">Go</button></div> <div style="position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); text-align: center; font-size: 10px;" data-svelte-h="svelte-451hut">Developed by Yikuan Sun <br>
+                © 2024 Lunal Graphics.</div></div></div> 
+			
 			<script>
 				{
-					__sveltekit_1t8t3o5 = {
-						base: "/sprite-replicator",
-						assets: "/sprite-replicator"
+					__sveltekit_1009i46 = {
+						base: new URL(".", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
+					const data = [null,null];
+
 					Promise.all([
-						import("/sprite-replicator/_app/immutable/entry/start.Zt7wjDev.js"),
-						import("/sprite-replicator/_app/immutable/entry/app.DqlaUB3u.js")
+						import("./_app/immutable/entry/start.DPFDfoa2.js"),
+						import("./_app/immutable/entry/app.B_x_JVHP.js")
 					]).then(([kit, app]) => {
-						kit.start(app, element);
+						kit.start(app, element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
 					});
 				}
 			</script>

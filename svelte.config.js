@@ -5,11 +5,12 @@ const config = {
 	kit: {
 		adapter: adapter({
 			pages: "docs",
-			fallback: "index.html",
-			precompress: true,
+			//fallback: "index.html",
+			//precompress: true,
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? "" : "/sprite-replicator"
+			//base: process.argv.includes('dev') ? "" : "/sprite-replicator",
+			relative: true,
 		},
 	},
 };
