@@ -9,7 +9,7 @@ const config = {
 			precompress: true,
 		}),
 		paths: {
-			base: process.argv.includes('dev') ? "" : "/photopea-sketchfab"
+			base: process.argv.includes('dev') ? "" : "/sprite-replicator"
 		},
 	},
 };
