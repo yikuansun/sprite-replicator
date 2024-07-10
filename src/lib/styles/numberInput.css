@@ -1,0 +1,13 @@
+/* Make Firefox number inputs show/hide spinner arrows like in Chrome */
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input[type=number]:hover {
+    -moz-appearance: revert!important;
+}
+
+input[type=number]:focus {
+    -moz-appearance: revert!important;
+}
