@@ -22,6 +22,7 @@
     import Square from "$lib/Square.svelte";
     import Photopea from "$lib/photopea.js";
     import base64ArrayBuffer from "$lib/base64ArrayBuffer.js";
+    import "$lib/styles/numberInput.css";
 
     let portal = "webapp";
 
