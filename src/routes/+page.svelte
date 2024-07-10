@@ -17,6 +17,7 @@
     import explosionTexture from "$lib/textures/Explosion.png";
     import cosmicEnergyTexture from "$lib/textures/Cosmic Energy.png";
     import strobeTexture from "$lib/textures/Strobe.png";
+    import ballTexture from "$lib/textures/Ball.png";
     import canvasClickDrag from "$lib/canvasClickDrag.js";
     import Collapsible from "$lib/Collapsible.svelte";
     import Square from "$lib/Square.svelte";
@@ -65,7 +66,7 @@
         zVariance: 0,
         sizeVariance: 0,
         densityVariance: 0,
-        xyAngleVariance: 45,
+        xyAngleVariance: 0,
         alphaVariance: 0,
         exposureVariance: 0,
         hueVariance: 0,
@@ -78,7 +79,7 @@
         vanishX: 960,
         vanishY: 540,
         viewFactor: 500,
-        textureURLs: [starTexture],
+        textureURLs: [ballTexture],
         gridSnap: 0,
         gravityXyAngle: 270,
         gravityAmount: 0,
@@ -322,6 +323,7 @@
                     <option value="smartObject">Use Current Layer</option>
                 {/if}
                 <optgroup label="Built-in Textures">
+                    <option value={ballTexture}>Ball</option>
                     <option value={matrixTexture}>Bit Rain</option>
                     <option value={bokehTexture}>Bokeh</option>
                     <option value={cosmicEnergyTexture}>Cosmic Energy</option>
@@ -331,7 +333,6 @@
                     <option value={orbTexture}>Orb</option>
                     <option value={plasmaTexture}>Plasma</option>
                     <option value={smokeTexture}>Smoke</option>
-                    <option value={starTexture}>Star</option>
                     <option value={starfieldTexture}>Starfield</option>
                     <option value={strobeTexture}>Strobe</option>
                 </optgroup>
@@ -346,7 +347,7 @@
             <br />
         {/each}
         <button on:click={() => {
-            userOptions["textureURLs"] = [...userOptions["textureURLs"], starTexture];
+            userOptions["textureURLs"] = [...userOptions["textureURLs"], ballTexture];
             tick();
         }} style:padding="3px 10px">+</button>
     </Collapsible>
@@ -461,8 +462,4 @@
             </div>
         </div>
     </div>
-{/if}
-
-{#if portal == "photopea"}
-    <!--photopea plugin-->
 {/if}
