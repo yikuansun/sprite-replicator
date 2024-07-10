@@ -8,6 +8,9 @@ const config = {
 			fallback: "index.html",
 			precompress: true,
 		}),
+		paths: {
+			base: process.argv.includes('dev') ? "" : "/photopea-sketchfab"
+		},
 	},
 };
 
