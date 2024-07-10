@@ -433,7 +433,7 @@
         <div style="position: absolute; right: 0; top: 0; width: 500px; height: 100vh; max-width: 100vw; background-color: #222222;">
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
                 style:text-align="center">
-                <b>SPRITE REPLICATOR</b> <br />
+                <b style:letter-spacing="2px">SPRITE REPLICATOR</b> <br />
                 <br />
                 <label>
                     Image Width:
@@ -453,6 +453,11 @@
                 </label> <br />
                 <br />
                 <button on:click={() => { tick(); startScreenVisible = false; }}>Go</button>
+            </div>
+            <div style="position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);"
+                style:text-align="center" style:font-size="10px">
+                Developed by Yikuan Sun <br />
+                &copy; 2024 Lunal Graphics.
             </div>
         </div>
     </div>
