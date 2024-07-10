@@ -23,6 +23,7 @@
     import Photopea from "$lib/photopea.js";
     import base64ArrayBuffer from "$lib/base64ArrayBuffer.js";
     import "$lib/styles/numberInput.css";
+    import splashImage from "$lib/images/splash.jpg";
 
     let portal = "webapp";
 
@@ -428,29 +429,31 @@
 </div>
 
 {#if startScreenVisible}
-    <div id="startScreen">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
-            style:text-align="center">
-            <b>SPRITE REPLICATOR</b> <br />
-            <br />
-            <label>
-                Image Width:
-                <input type="number" bind:value={userOptions["imageWidth"]}
-                    on:input={() => {
-                        userOptions["vanishX"] = userOptions["imageWidth"] / 2;
-                        userOptions["baseX"] = userOptions["imageWidth"] / 2;
-                    }} on:change={tick} style:width="60px" />
-            </label> <br />
-            <label>
-                Image Height:
-                <input type="number" bind:value={userOptions["imageHeight"]}
-                    on:input={() => {
-                        userOptions["vanishY"] = userOptions["imageHeight"] / 2;
-                        userOptions["baseY"] = userOptions["imageHeight"] / 2;
-                    }} on:change={tick} style:width="60px" />
-            </label> <br />
-            <br />
-            <button on:click={() => { tick(); startScreenVisible = false; }}>Go</button>
+    <div id="startScreen" style:background-image="url('{splashImage}')">
+        <div style="position: absolute; right: 0; top: 0; width: 500px; height: 100vh; max-width: 100vw; background-color: #222222;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+                style:text-align="center">
+                <b>SPRITE REPLICATOR</b> <br />
+                <br />
+                <label>
+                    Image Width:
+                    <input type="number" bind:value={userOptions["imageWidth"]}
+                        on:input={() => {
+                            userOptions["vanishX"] = userOptions["imageWidth"] / 2;
+                            userOptions["baseX"] = userOptions["imageWidth"] / 2;
+                        }} on:change={tick} style:width="60px" />
+                </label> <br />
+                <label>
+                    Image Height:
+                    <input type="number" bind:value={userOptions["imageHeight"]}
+                        on:input={() => {
+                            userOptions["vanishY"] = userOptions["imageHeight"] / 2;
+                            userOptions["baseY"] = userOptions["imageHeight"] / 2;
+                        }} on:change={tick} style:width="60px" />
+                </label> <br />
+                <br />
+                <button on:click={() => { tick(); startScreenVisible = false; }}>Go</button>
+            </div>
         </div>
     </div>
 {/if}
