@@ -66,16 +66,17 @@ input:focus, select:focus {
     color: #00AA00;
 }
 
-button, ::-webkit-file-upload-button {
+button {
     color: #69AA00;
     border: 2px solid #69AA00;
     background-color: transparent;
     padding: 6px 16px;
     border-radius: 25px;
     font-weight: bold;
+    transition: color 0.1s, border-color 0.1s;
 }
 
-button:hover, ::-webkit-file-upload-button:hover {
+button:hover {
     color: #00AA00;
     border-color: #00AA00;
 }
