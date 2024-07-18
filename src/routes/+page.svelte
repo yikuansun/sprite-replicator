@@ -21,30 +21,31 @@
     import canvasClickDrag from "$lib/canvasClickDrag.js";
     import Collapsible from "$lib/Collapsible.svelte";
     import Square from "$lib/Square.svelte";
-    import Photopea from "$lib/photopea.js";
+    import Photopea from "photopea";
     import base64ArrayBuffer from "$lib/base64ArrayBuffer.js";
     import "$lib/styles/numberInput.css";
     import splashImage from "$lib/images/splash.jpg";
 
     let portal = "webapp";
+    let pea;
 
-    onMount(() => {
+    onMount(async () => {
         let searchParams = new URLSearchParams($page.url.searchParams);
         portal = searchParams.get("portal");
         createNoise();
         renderPattern();
         if (portal == "photopea") {
-            Photopea.runScript(window.parent,
-                `app.echoToOE(app.activeDocument.width.toString());
-                app.echoToOE(app.activeDocument.height.toString());`).then((wh) => {
-                userOptions["imageWidth"] = wh[0];
-                userOptions["imageHeight"] = wh[1];
-                userOptions["vanishX"] = userOptions["imageWidth"] / 2;
-                userOptions["baseX"] = userOptions["imageWidth"] / 2;
-                userOptions["vanishY"] = userOptions["imageHeight"] / 2;
-                userOptions["baseY"] = userOptions["imageHeight"] / 2;
-                tick();
-            });
+            pea = new Photopea(window.parent);
+            let dimensions = await pea.runScript(`
+                app.echoToOE(app.activeDocument.width.toString());
+                app.echoToOE(app.activeDocument.height.toString());`);
+            userOptions["imageWidth"] = dimensions[0];
+            userOptions["imageHeight"] = dimensions[1];
+            userOptions["vanishX"] = userOptions["imageWidth"] / 2;
+            userOptions["baseX"] = userOptions["imageWidth"] / 2;
+            userOptions["vanishY"] = userOptions["imageHeight"] / 2;
+            userOptions["baseY"] = userOptions["imageHeight"] / 2;
+            tick();
         }
     });
 
@@ -417,9 +418,7 @@
         <button on:click={() => {
             exportButtonReal.href = outputCanvas.toDataURL();
             if (portal == "photopea") {
-                Photopea.runScript(window.parent, `
-                    app.open("${exportButtonReal.href}", null, true);
-                `);
+                pea.openFromURL(exportButtonReal.href, true);
             }
             else exportButtonReal.click();
         }}>
